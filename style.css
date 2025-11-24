@@ -1,0 +1,408 @@
+:root {
+  /* Cores - Preto profundo, tons de terminal, e o amarelo Deschamps */
+  --bg-body: #0a0a0a;             /* Fundo quase preto */
+  --bg-dark-surface: #121212;     /* Superfícies escuras */
+  --bg-light-surface: #1b1b1b;    /* Superfícies um pouco mais claras */
+
+  --text-main: #f0f0f0;           /* Texto principal */
+  --text-body: #b0b0b0;           /* Texto de parágrafo */
+  --text-muted: #6a6a6a;          /* Texto secundário (datas, etc.) */
+  
+  --color-terminal: #00ff00;      /* Verde vibrante para terminal/código */
+  --color-accent: #ffd500;        /* Amarelo de destaque (Deschamps) */
+  --color-link-hover: #ffffff;    /* Branco puro no hover do link */
+
+  --border-color: #2a2a2a;        /* Borda sutil */
+  --radius-sm: 4px;               /* Pequeno raio para botões/tags */
+  --radius-md: 8px;               /* Raio para blocos maiores */
+
+  /* Fontes - Monospace para terminal, sans-serif para o resto */
+  --font-monospace: 'JetBrains Mono', 'Fira Code', 'Cascadia Mono', monospace;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --container-width: 800px; /* Largura ideal para leitura de terminal */
+}
+
+/* Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-body);
+  color: var(--text-body);
+  line-height: 1.7;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(circle at center, rgba(10, 10, 10, 0.8) 0%, rgba(0, 0, 0, 0.95) 100%),
+    repeating-linear-gradient(0deg, var(--bg-body) 0, var(--bg-body) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(90deg, var(--bg-body) 0, var(--bg-body) 1px, transparent 1px, transparent 40px);
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+}
+
+a { 
+  text-decoration: none; 
+  color: var(--color-terminal); 
+  transition: color 0.2s, background-color 0.2s;
+  border-bottom: 1px dashed var(--color-terminal); /* Sublinhado pontilhado */
+}
+
+a:hover { 
+  color: var(--color-accent); 
+  border-bottom-color: var(--color-accent);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px 100px;
+}
+
+/* Efeito de Cursor Piscando */
+.typing::after {
+  content: '|';
+  display: inline-block;
+  animation: blink-caret .75s step-end infinite;
+  color: var(--color-terminal);
+  font-family: var(--font-monospace);
+  margin-left: 2px;
+}
+
+@keyframes blink-caret {
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* HEADER - Topo do Terminal */
+header {
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+  border-bottom: 1px solid var(--border-color);
+  font-family: var(--font-monospace);
+}
+
+.brand {
+  font-size: 18px;
+  color: var(--color-terminal);
+  border-bottom: none;
+  font-weight: bold;
+}
+
+.lang-switcher button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-monospace);
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.lang-switcher button.active {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* HERO SECTION - O Prompt Inicial */
+.hero {
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.terminal-prompt {
+  font-family: var(--font-monospace);
+  color: var(--color-terminal);
+  margin-bottom: 15px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.terminal-prompt::before {
+  content: 'guest@filipe:~ $';
+  color: var(--color-accent);
+  margin-right: 8px;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 6vw, 48px);
+  color: var(--text-main);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero-description {
+  font-size: 18px;
+  color: var(--text-body);
+  max-width: 650px;
+}
+
+/* Avatar Flutuante (como um pop-up de notificação no terminal) */
+.avatar-floating {
+  position: absolute;
+  top: 10px;
+  right: -80px; /* Ajuste a posição conforme necessário */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-terminal);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+.avatar-floating:hover {
+  transform: scale(1.05);
+}
+
+
+/* SEÇÕES - Blocos de Saída do Terminal */
+.section-output {
+  margin-bottom: 80px;
+  background: var(--bg-dark-surface);
+  border: 1px solid var(--border-color);
+  padding: 40px;
+  border-radius: var(--radius-md);
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.section-output::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background-color: var(--bg-light-surface);
+  border-bottom: 1px solid var(--border-color);
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+.section-output .terminal-header {
+  position: absolute;
+  top: 8px;
+  left: 15px;
+  font-family: var(--font-monospace);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.section-output .terminal-header span {
+    color: var(--color-terminal);
+}
+
+.section-output h2 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  color: var(--text-main);
+  margin-bottom: 25px;
+  padding-top: 20px; /* Espaço para o header falso */
+  position: relative;
+  z-index: 1;
+}
+
+.section-output p {
+  margin-bottom: 18px;
+}
+
+.section-output strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Lista de Projetos (como lista de arquivos ou logs) */
+.project-item {
+  display: block;
+  padding: 20px 0;
+  border-bottom: 1px dashed var(--border-color);
+  transition: background-color 0.2s;
+}
+.project-item:last-child { border-bottom: none; }
+.project-item:hover { background-color: rgba(255, 255, 255, 0.03); }
+
+.project-meta {
+  font-family: var(--font-monospace);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.project-desc {
+  font-size: 15px;
+  color: var(--text-body);
+}
+
+.tech-tag {
+  display: inline-block;
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  background: rgba(0, 255, 0, 0.1);
+  color: var(--color-terminal);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-right: 8px;
+  margin-top: 10px;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+/* Call to Action (Prompt final) */
+.cta-section {
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--bg-dark-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.cta-section h2 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+.cta-section p {
+  max-width: 550px;
+  margin: 0 auto 30px auto;
+  font-size: 18px;
+}
+
+.btn-terminal {
+  display: inline-block;
+  background: var(--color-terminal);
+  color: var(--bg-body);
+  font-family: var(--font-monospace);
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  transition: background-color 0.2s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.btn-terminal:hover {
+  background: var(--color-accent);
+  color: var(--bg-body);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(255, 213, 0, 0.4);
+}
+
+.social-links {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  font-family: var(--font-monospace);
+  font-size: 14px;
+}
+
+.social-links a {
+  color: var(--text-body);
+  border-bottom: 1px dotted var(--text-muted);
+}
+.social-links a:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* FOOTER */
+footer {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px dashed var(--border-color);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: var(--font-monospace);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .avatar-floating {
+    position: static;
+    margin: 20px auto 40px auto;
+    display: block;
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-title { font-size: 32px; }
+  .section-output, .cta-section { padding: 30px 20px; }
+  .section-output h2 { font-size: 24px; padding-top: 15px;}
+  .btn-terminal { padding: 12px 25px; font-size: 14px; }
+  header { margin-bottom: 30px; padding: 25px 0;}
+}
+
+/* CONTAINER PARA OS BOTÕES CTA */
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+/* Botão Secundário (Email) - Menos chamativo, mas funcional */
+.btn-secondary {
+    display: inline-block;
+    background: none;
+    color: var(--text-body);
+    font-family: var(--font-monospace);
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    border: 1px solid var(--border-color); /* Borda sutil de terminal */
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    color: var(--color-terminal);
+    border-color: var(--color-terminal);
+    background: rgba(0, 255, 0, 0.05); /* Efeito hover suave */
+    transform: translateY(-2px);
+    border-bottom: 1px solid var(--color-terminal); /* Mantém o estilo de link */
+}
+
+/* Garante que o botão primário btn-terminal não sofra interferência no hover */
+.btn-terminal.btn-main:hover {
+    border-bottom: none; 
+}
+
+/* Responsividade para CTAs */
+@media (max-width: 600px) {
+    .cta-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn-terminal, .btn-secondary {
+        width: 100%;
+        max-width: 300px; /* Limita a largura em telas muito pequenas */
+    }
+}

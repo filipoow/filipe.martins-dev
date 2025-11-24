@@ -1,1080 +1,272 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Filipe Martins do Nascimento - Analista de Dados Pleno</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Fonte Google (opcional) -->
+  <meta charset="UTF-8" />
+  <title>Filipe Martins | Dev & Data Solver</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    :root {
-      --primary: #0056d6;
-      --primary-dark: #003c99;
-      --primary-light: #4c8dff;
-      --bg: #f4f6fb;
-      --text: #1f2933;
-      --muted: #6b7280;
-      --card-bg: #ffffff;
-      --border-soft: #e5e7eb;
-      --accent-yellow: #ffc93c;
-      --accent-red: #ff6961;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
-      --radius-lg: 18px;
-      --radius-full: 999px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(180deg, #0044c4 0%, #0066ff 40%, #f4f6fb 40%);
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 16px 48px;
-    }
-
-    /* HERO / TOPO -------------------------------------------------- */
-
-    .hero {
-      padding: 16px 0 32px;
-      color: #ffffff;
-    }
-
-    .hero-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .hero-left-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-    }
-
-    .tag-age {
-      background: rgba(255, 255, 255, 0.14);
-      border-radius: var(--radius-full);
-      padding: 4px 10px;
-      font-weight: 500;
-    }
-
-    .tag-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.16);
-      border-radius: var(--radius-full);
-      padding: 4px 10px;
-      font-size: 12px;
-    }
-
-    .tag-brand span.logo-pill {
-      background: #ffffff;
-      color: var(--primary-dark);
-      border-radius: var(--radius-full);
-      padding: 2px 10px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .hero-logo {
-      font-size: 14px;
-      font-weight: 500;
-      opacity: 0.9;
-    }
-
-    .hero-main {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
-      gap: 24px;
-      align-items: center;
-      margin-top: 12px;
-    }
-
-    .hero-title {
-      font-size: 36px;
-      line-height: 1.15;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-
-    .hero-subtitle {
-      margin-top: 6px;
-      font-size: 16px;
-      font-weight: 500;
-      opacity: 0.95;
-    }
-
-    .hero-description {
-      margin-top: 10px;
-      font-size: 14px;
-      max-width: 520px;
-      opacity: 0.9;
-    }
-
-    .hero-badge {
-      margin-top: 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.14);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-    }
-
-    .hero-badge span.dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--accent-yellow);
-      box-shadow: 0 0 8px rgba(255, 201, 60, 0.8);
-    }
-
-    .hero-photo-wrapper {
-      position: relative;
-      justify-self: end;
-    }
-
-    .hero-photo-card {
-      width: 220px;
-      height: 220px;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: var(--shadow-soft);
-      background: #cbd5f5;
-      border: 3px solid rgba(255, 255, 255, 0.65);
-    }
-
-    .hero-photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .hero-photo-badge {
-      position: absolute;
-      bottom: 10px;
-      right: -6px;
-      background: #ffffff;
-      color: var(--primary-dark);
-      border-radius: var(--radius-full);
-      padding: 6px 12px;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
-    }
-
-    .hero-photo-badge span.icon-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--primary);
-    }
-
-    /* BARRA NOVIDADE ----------------------------------------------- */
-
-    .news-banner {
-      margin-top: 20px;
-      background: linear-gradient(90deg, #ffe08a, #ffb347);
-      border-radius: var(--radius-lg);
-      padding: 8px 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #3b2f15;
-      font-size: 13px;
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
-    }
-
-    .news-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-
-    .news-label {
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 11px;
-    }
-
-    /* MAIN CONTENT WRAPPER ----------------------------------------- */
-
-    .content {
-      margin-top: 32px;
-    }
-
-    section {
-      margin-bottom: 28px;
-    }
-
-    /* SEÇÃO: Quem é esse tal de... -------------------------------- */
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 22px;
-      padding: 20px 22px;
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .card-subtitle {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .pill-question {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      background: #eef2ff;
-      font-size: 12px;
-      color: var(--primary-dark);
-      font-weight: 500;
-    }
-
-    .pill-question span.icon {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 1px solid #a5b4fc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      font-size: 14px;
-    }
-
-    .about-block-title {
-      font-weight: 600;
-      color: var(--primary-dark);
-      margin-bottom: 6px;
-    }
-
-    .about-text {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* GANHOS ------------------------------------------------------- */
-
-    .section-title-center {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 14px;
-    }
-
-    .benefits-grid {
-      border-radius: 22px;
-      border: 1px dashed #cbd5f5;
-      padding: 18px 14px;
-      background: rgba(255, 255, 255, 0.92);
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .benefit-item {
-      text-align: center;
-      padding: 12px 10px;
-    }
-
-    .benefit-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1px solid #d1d5db;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 6px;
-      font-size: 16px;
-    }
-
-    .benefit-title {
-      font-weight: 600;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .benefit-text {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .benefit-tag {
-      margin-top: 8px;
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-      background: #eef2ff;
-      color: var(--primary-dark);
-      font-size: 11px;
-      font-weight: 500;
-    }
-
-    /* PROJETOS ----------------------------------------------------- */
-
-    .projects-wrapper {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-      gap: 20px;
-    }
-
-    .projects-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .project-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 14px 14px 12px;
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.12);
-      border: 1px solid var(--border-soft);
-      margin-bottom: 10px;
-      font-size: 13px;
-    }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .project-name {
-      font-weight: 600;
-      font-size: 13px;
-    }
-
-    .project-year {
-      font-size: 11px;
-      color: var(--muted);
-      background: #f3f4ff;
-      padding: 3px 8px;
-      border-radius: var(--radius-full);
-    }
-
-    .project-tags {
-      margin-top: 6px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-    }
-
-    .project-tag-pill {
-      padding: 3px 8px;
-      border-radius: var(--radius-full);
-      background: #eef2ff;
-      color: var(--primary-dark);
-    }
-
-    .project-text {
-      color: var(--muted);
-      margin-top: 4px;
-      font-size: 12px;
-    }
-
-    /* RECOMENDAÇÕES ------------------------------------------------ */
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 8px;
-    }
-
-    .testimonial-card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 12px 14px;
-      border: 1px solid var(--border-soft);
-      font-size: 12px;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-    }
-
-    .testimonial-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .testimonial-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: var(--primary-dark);
-      font-weight: 600;
-    }
-
-    .testimonial-name {
-      font-weight: 600;
-      font-size: 12px;
-    }
-
-    .testimonial-role {
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .testimonial-text {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    /* CTA PRINCIPAL ------------------------------------------------ */
-
-    .cta-main {
-      margin-top: 32px;
-      background: linear-gradient(135deg, #0044c4, #0066ff);
-      border-radius: 26px;
-      padding: 22px 20px;
-      color: #ffffff;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .cta-main-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .cta-main-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .cta-main-text {
-      font-size: 13px;
-      max-width: 520px;
-      opacity: 0.96;
-    }
-
-    .cta-main-badges {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 11px;
-    }
-
-    .cta-badge-pill {
-      padding: 4px 9px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .cta-main-actions {
-      margin-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .cta-buttons {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 9px 16px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
-    }
-
-    .btn-primary {
-      background: #ffffff;
-      color: var(--primary-dark);
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.25);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.35);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-1px);
-    }
-
-    .cta-availability {
-      font-size: 11px;
-      opacity: 0.9;
-      text-align: right;
-    }
-
-    /* BLOCO: Não possui vagas? ------------------------------------- */
-
-    .no-jobs {
-      margin-top: 16px;
-      background: #fff7ed;
-      border-radius: 22px;
-      padding: 16px 18px;
-      border: 1px solid #fed7aa;
-      display: flex;
-      gap: 10px;
-      font-size: 13px;
-      color: #7c2d12;
-    }
-
-    .no-jobs-icon {
-      margin-top: 2px;
-      font-size: 18px;
-    }
-
-    .no-jobs-title {
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    /* FOOTER ------------------------------------------------------- */
-
-    .footer {
-      margin-top: 12px;
-      text-align: center;
-      font-size: 11px;
-      color: var(--muted);
-      padding-bottom: 18px;
-    }
-
-    .footer a {
-      color: var(--primary-dark);
-      font-weight: 500;
-    }
-
-    /* RESPONSIVO --------------------------------------------------- */
-
-    @media (max-width: 900px) {
-      .hero-main {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-photo-wrapper {
-        justify-self: flex-start;
-      }
-
-      .projects-wrapper {
-        grid-template-columns: 1fr;
-      }
-
-      .testimonials-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .benefits-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-main-top {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .cta-main-actions {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .cta-availability {
-        text-align: left;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .hero-title {
-        font-size: 28px;
-      }
-
-      .hero-subtitle {
-        font-size: 14px;
-      }
-
-      .card,
-      .cta-main,
-      .no-jobs {
-        border-radius: 18px;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="page">
-    <header class="hero">
-      <div class="container">
+<body class="lang-pt">
 
-        <div class="hero-bar">
-          <div class="hero-left-meta">
-            <div class="tag-age">23 anos</div>
-            <div class="tag-brand">
-              <span>Experiência em</span>
-              <span class="logo-pill">Jadlog</span>
-              <span class="logo-pill">Omie</span>
-            </div>
-          </div>
-          <div class="hero-logo">
-            Currículo interativo · Analista de Dados Pleno
-          </div>
-        </div>
-
-        <div class="hero-main">
-          <div>
-            <h1 class="hero-title">FILIPE<br> MARTINS DO NASCIMENTO</h1>
-            <p class="hero-subtitle">Analista de Dados Pleno · São Paulo - SP</p>
-            <p class="hero-description">
-              Procurando por alguém de dados para solucionar os desafios da sua equipe? Sua procura chegou ao fim!
-            </p>
-            <div class="hero-badge">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-          </div>
-
-          <div class="hero-photo-wrapper">
-            <div class="hero-photo-card">
-              <!-- Troque o src pelo caminho da sua foto -->
-              <img src="img/filipe-perfil.jpg" alt="Foto de Filipe Martins do Nascimento">
-            </div>
-            <div class="hero-photo-badge">
-              <span class="icon-dot"></span>
-              <span>Disponível para entrevistas</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="news-banner">
-          <div class="news-icon">⚡</div>
-          <div>
-            <div class="news-label">NOVIDADE</div>
-            <div>Disponível para uma conversa ou entrevista ainda hoje, em horário comercial.</div>
-          </div>
-        </div>
-
+  <div class="container">
+    
+    <header>
+      <a href="#" class="brand">filipe.martins-dev</a>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang-target="pt">PT</button>
+        <button class="lang-btn" data-lang-target="en">EN</button>
       </div>
     </header>
 
-    <main class="content">
-      <div class="container">
-
-        <!-- Quem é esse tal de Filipe? -->
-        <section>
-          <div class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Afinal de contas, quem é esse tal de <strong>FILIPE</strong>?</div>
-                <div class="card-subtitle">
-                  Data Analyst | Python · Salesforce CRM · Power BI · Excel · PL/SQL · SOQL · OracleDB · ETL · Big Data
-                </div>
-              </div>
-              <div class="pill-question">
-                <span class="icon">?</span>
-                <span>Vamos aos fatos</span>
-              </div>
-            </div>
-
-            <div class="about-grid">
-              <div>
-                <div class="about-block-title">O que ele faz?</div>
-                <p class="about-text">
-                  Como Analista de Dados, com sólida experiência em Python, CRM (Salesforce), DAX,
-                  Visualização de Dados (Power BI, Tableau), Microsoft Excel, PL/SQL, SOQL, OracleDB,
-                  ETL e Big Data, dedico-me a fornecer insights e soluções baseados em dados que
-                  impulsionam o crescimento empresarial.
-                  <br><br>
-                  Atualmente, na <strong>Jadlog Logística</strong>, faço parte da equipe de Dados do setor comercial.
-                  Atuo desenvolvendo melhorias e automações de processos, mapeando fluxos de trabalho,
-                  criando métricas e ferramentas automatizadas para apoiar a tomada de decisão da equipe de vendas.
-                </p>
-              </div>
-              <div>
-                <div class="about-block-title">O que tem de diferente?</div>
-                <p class="about-text">
-                  Tenho <strong>aprendizado rápido</strong>, organização e trabalho muito bem em equipe.
-                  Gosto de ensinar e explicar minhas soluções, trazendo didática para o dia a dia.
-                  <br><br>
-                  Curto desafios complexos, especialmente aqueles que parecem “impossíveis” à primeira vista —
-                  são eles que mais exploram minha criatividade e capacidade de resolver problemas.
-                  <br><br>
-                  Atuar com dados em contextos diferentes, como <strong>logística</strong> (3 anos na Jadlog)
-                  e <strong>SaaS</strong> (1 ano e 5 meses), me deu uma visão ampla e prática sobre como
-                  dados realmente geram valor para o negócio.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- O que você ganha contratando o Filipe -->
-        <section>
-          <h2 class="section-title-center">O que você ganha contratando o <strong>FILIPE</strong>?</h2>
-          <div class="benefits-grid">
-            <div class="benefit-item">
-              <div class="benefit-icon">✨</div>
-              <div class="benefit-title">Entusiasmo com o Novo</div>
-              <div class="benefit-text">
-                Curiosidade constante, prazer em aprender e vontade de desbravar novas ferramentas, dados e processos.
-              </div>
-              <span class="benefit-tag">Sempre em atualização</span>
-            </div>
-
-            <div class="benefit-item">
-              <div class="benefit-icon">🧠</div>
-              <div class="benefit-title">Soluções Inteligentes</div>
-              <div class="benefit-text">
-                Transformo “talvez” em “com certeza” e “problema” em “oportunidade”, usando dados, automações e modelos bem pensados.
-              </div>
-              <span class="benefit-tag">Data-driven</span>
-            </div>
-
-            <div class="benefit-item">
-              <div class="benefit-icon">📈</div>
-              <div class="benefit-title">Produtividade</div>
-              <div class="benefit-text">
-                Converto horas em resultado: coleciono processos automatizados, KPIs claros e entregas que destravam o time.
-              </div>
-              <span class="benefit-tag">Foco em resultado</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Projetos -->
-        <section>
-          <div class="projects-wrapper">
-            <div>
-              <h2 class="projects-title">E o que o <strong>FILIPE</strong> já produziu?</h2>
-
-              <div class="project-card">
-                <div class="project-header">
-                  <div class="project-name">
-                    Estrutura de Banco de Dados & ETL para KPIs Comerciais
-                  </div>
-                  <div class="project-year">2022</div>
-                </div>
-                <p class="project-text">
-                  Criação de uma estrutura de banco de dados comercial robusta, com processos de ETL
-                  focados em monitorar KPIs e apoiar decisões estratégicas da área de vendas.
-                </p>
-                <div class="project-tags">
-                  <span class="project-tag-pill">PL/SQL</span>
-                  <span class="project-tag-pill">Python</span>
-                  <span class="project-tag-pill">Spark</span>
-                  <span class="project-tag-pill">Airflow</span>
-                  <span class="project-tag-pill">ETL & Pipelines</span>
-                </div>
-              </div>
-
-              <div class="project-card">
-                <div class="project-header">
-                  <div class="project-name">
-                    Formatação de Tabelas de Preço de Frete em Lote
-                  </div>
-                  <div class="project-year">2022</div>
-                </div>
-                <p class="project-text">
-                  Desenvolvimento de scripts em batch para formatação automática de tabelas de preço
-                  de frete para diferentes plataformas (VTEX, Intelipost, Loja Integrada), garantindo
-                  padrão, estilo e requisitos específicos de cada cliente.
-                </p>
-                <div class="project-tags">
-                  <span class="project-tag-pill">Python</span>
-                  <span class="project-tag-pill">Pandas</span>
-                  <span class="project-tag-pill">NumPy</span>
-                  <span class="project-tag-pill">xlsxwriter</span>
-                  <span class="project-tag-pill">Automação</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div class="project-card">
-                <div class="project-header">
-                  <div class="project-name">
-                    Gestão de Dados & Integração no Salesforce
-                  </div>
-                  <div class="project-year">2023</div>
-                </div>
-                <p class="project-text">
-                  Estruturei objetos, fluxos e rotinas de dados no Salesforce, utilizando SOQL, Python,
-                  Salesforce API e ViaCep API para integrar, consultar e manter o CRM limpo, confiável
-                  e pronto para análise.
-                </p>
-                <p class="project-text">
-                  Incluiu implementação de processos de limpeza, validação e governança de dados,
-                  garantindo qualidade e consistência para toda a operação comercial.
-                </p>
-                <div class="project-tags">
-                  <span class="project-tag-pill">Salesforce</span>
-                  <span class="project-tag-pill">SOQL</span>
-                  <span class="project-tag-pill">Python</span>
-                  <span class="project-tag-pill">APIs</span>
-                  <span class="project-tag-pill">Data Quality</span>
-                </div>
-              </div>
-
-              <div class="project-card">
-                <div class="project-header">
-                  <div class="project-name">
-                    Insights Personalizados com Salesforce & Power BI
-                  </div>
-                  <div class="project-year">2023</div>
-                </div>
-                <p class="project-text">
-                  Criação de KPIs e dashboards integrando dados do Salesforce ao Power BI, com análise
-                  do pipeline comercial, acompanhamento de clientes e indicadores que apoiam a gestão
-                  e priorização de oportunidades.
-                </p>
-                <div class="project-tags">
-                  <span class="project-tag-pill">Power BI</span>
-                  <span class="project-tag-pill">DAX</span>
-                  <span class="project-tag-pill">Salesforce</span>
-                  <span class="project-tag-pill">Visualização de Dados</span>
-                  <span class="project-tag-pill">KPIs Comerciais</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Recomendações -->
-        <section>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Quem conhece, indica o <strong>FILIPE</strong>:</div>
-            </div>
-
-            <div class="testimonials-grid">
-              <div class="testimonial-card">
-                <div class="testimonial-header">
-                  <div class="testimonial-avatar">M</div>
-                  <div>
-                    <div class="testimonial-name">Michele Lopes</div>
-                    <div class="testimonial-role">
-                      Coordenadora Comercial · Trabalhou com Filipe na Jadlog
-                    </div>
-                  </div>
-                </div>
-                <p class="testimonial-text">
-                  “Profissional ímpar. Comprometimento e profissionalismo incomparável. Toda demanda
-                  a ele destinada era sempre entregue no prazo esperado, com riqueza de detalhes e aperfeiçoamentos.”
-                </p>
-              </div>
-
-              <div class="testimonial-card">
-                <div class="testimonial-header">
-                  <div class="testimonial-avatar">L</div>
-                  <div>
-                    <div class="testimonial-name">Lorena Santos Andrade</div>
-                    <div class="testimonial-role">
-                      Analista de Informações de Gestão & Product Owner · Parceira de equipe
-                    </div>
-                  </div>
-                </div>
-                <p class="testimonial-text">
-                  “Tive a honra de trabalhar com Filipe, um profissional dedicado e esforçado.
-                  Nenhum obstáculo é grande demais para ele no desenvolvimento, sempre trazendo
-                  inovações e melhorias.
-                  Como desenvolvedor e tech lead, Filipe foi meu braço direito, totalmente inteirado
-                  nos assuntos e impecavelmente confiável. Recomendo-o fortemente para qualquer
-                  equipe que busque excelência e inovação.”
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- CTA principal -->
-        <section>
-          <div class="cta-main">
-            <div class="cta-main-top">
-              <div>
-                <div class="cta-main-title">Ficou interessado e quer me conhecer melhor?</div>
-                <p class="cta-main-text">
-                  É simples: estou disponível para um bate-papo sobre dados, desafios da sua equipe
-                  e como posso contribuir com soluções práticas e orientadas a resultados.
-                </p>
-                <div class="cta-main-badges">
-                  <span class="cta-badge-pill">Python</span>
-                  <span class="cta-badge-pill">Power BI</span>
-                  <span class="cta-badge-pill">Salesforce CRM</span>
-                  <span class="cta-badge-pill">ETL & Pipelines</span>
-                  <span class="cta-badge-pill">KPIs Comerciais</span>
-                </div>
-              </div>
-              <div class="cta-availability">
-                <strong>Horário de disponibilidade:</strong><br>
-                09h às 18h (horário comercial)
-              </div>
-            </div>
-
-            <div class="cta-main-actions">
-              <div class="cta-buttons">
-                <a
-                  class="btn-primary"
-                  href="https://calendly.com/emaildofilipe-m/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>📅 Marcar uma entrevista</span>
-                </a>
-                <a
-                  class="btn-secondary"
-                  href="mailto:fmartins.nascimento@outlook.com"
-                >
-                  ✉️ Enviar um e-mail
-                </a>
-              </div>
-              <div class="cta-availability">
-                Ou, se preferir, me chame diretamente pelo e-mail acima para combinarmos um horário.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Não possui vagas -->
-        <section>
-          <div class="no-jobs">
-            <div class="no-jobs-icon">⚠️</div>
-            <div>
-              <div class="no-jobs-title">Não possui vagas no momento?</div>
-              <div>
-                Se a sua equipe estiver fechada ou se neste momento não tivermos dado match,
-                você também pode me ajudar <strong>compartilhando este currículo</strong> com seus pares e amigos
-                que estejam buscando um Analista de Dados com perfil analítico, mão na massa e foco em resultado.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-          Este é o currículo interativo de <strong>Filipe Martins do Nascimento</strong>.<br>
-          Contato: <a href="mailto:fmartins.nascimento@outlook.com">fmartins.nascimento@outlook.com</a> ·
-          <a href="https://www.linkedin.com/in/filipoow" target="_blank" rel="noopener noreferrer">LinkedIn</a> ·
-          <a href="https://github.com/filipoow" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </footer>
-
+    <section class="hero">
+      <div class="terminal-prompt">
+        <span class="typing" data-lang="pt">bem-vindo-filipe-dev</span>
+        <span class="typing" data-lang="en">welcome-filipe-dev</span>
       </div>
-    </main>
+
+      <h1 class="hero-title" data-lang="pt">
+        <span class="highlight">Filipe Martins</span>: Transformando complexidade em soluções eficientes.
+      </h1>
+      <h1 class="hero-title" data-lang="en">
+        <span class="highlight">Filipe Martins</span>: Turning complexity into efficient solutions.
+      </h1>
+      
+      <p class="hero-description" data-lang="pt">
+        Desenvolvedor e Analista de Dados Pleno com paixão por desvendar sistemas complexos e construir ferramentas que realmente fazem a diferença na vida das pessoas e nas operações.
+      </p>
+      <p class="hero-description" data-lang="en">
+        Mid-level Developer and Data Analyst with a passion for unraveling complex systems and building tools that truly make a difference in people's lives and operations.
+      </p>
+
+      <img src="img/filipe-perfil.jpg" alt="Filipe Martins" class="avatar-floating">
+    </section>
+
+    <section class="section-output">
+      <div class="terminal-header">~/filipe/bio $ <span class="typing-header">cat my_story.txt</span></div>
+      <h2 data-lang="pt">Minha História: Do Quebra-Cabeça ao Código</h2>
+      <h2 data-lang="en">My Story: From Puzzles to Code</h2>
+      
+      <p data-lang="pt">
+        A programação, para mim, sempre foi a extensão natural da minha paixão por quebra-cabeças. Desde cedo, fui atraído pela lógica e pela arte de desvendar sistemas complexos. No entanto, minha jornada profissional começou em um lugar inesperado: o backoffice comercial da <strong>Jadlog</strong>.
+      </p>
+      <p data-lang="en">
+        Programming, for me, has always been the natural extension of my passion for puzzles. Early on, I was drawn to the logic and art of unraveling complex systems. However, my professional journey began in an unexpected place: the commercial backoffice at <strong>Jadlog</strong>.
+      </p>
+
+      <p data-lang="pt">
+        Lá, eu me deparei com um cenário comum: processos manuais exaustivos, planilhas massivas e uma dependência que roubava tempo e produtividade. Vendo as dificuldades da equipe, o "programador" dentro de mim viu uma oportunidade de otimizar. Comecei a desenvolver soluções e automações por conta própria, transformando o que era tedioso em eficiente.
+      </p>
+      <p data-lang="en">
+        There, I encountered a common scenario: exhaustive manual processes, massive spreadsheets, and a dependency that stole time and productivity. Seeing the team's difficulties, the "programmer" within me saw an opportunity to optimize. I started developing solutions and automations on my own, transforming what was tedious into efficient.
+      </p>
+      
+      <p data-lang="pt">
+        Essa iniciativa chamou a atenção, e meu gerente me convidou para integrar o <strong>Time de Dados</strong>. Foi ali que pude, de fato, aplicar e aprofundar meu conhecimento em engenharia de dados, Python e SQL. Na Jadlog, cresci de aprendiz a <strong>Analista de Dados Pleno</strong> em 3 anos, construindo projetos que realmente faziam a diferença na logística e nas operações comerciais.
+      </p>
+      <p data-lang="en">
+        This initiative caught attention, and my manager invited me to join the <strong>Data Team</strong>. It was there that I could truly apply and deepen my knowledge in data engineering, Python, and SQL. At Jadlog, I grew from an apprentice to a <strong>Mid-Level Data Analyst</strong> in 3 years, building projects that genuinely made a difference in logistics and commercial operations.
+      </p>
+
+      <p data-lang="pt">
+        Hoje, na <strong>Omie</strong>, estou explorando o universo SaaS e mergulhando em projetos ainda mais desafiadores, como <strong>Machine Learning</strong> para otimização de alocação de clientes e a criação de <strong>Chatbots com IA</strong> para agilizar o conhecimento interno. Minha motivação é constante: fazer a diferença, inovar e trazer as melhores soluções para qualquer equipe ou empresa em que eu esteja.
+      </p>
+      <p data-lang="en">
+        Today, at <strong>Omie</strong>, I'm exploring the SaaS universe and diving into even more challenging projects, such as <strong>Machine Learning</strong> for client allocation optimization and the creation of <strong>AI Chatbots</strong> to streamline internal knowledge. My motivation is constant: to make a difference, innovate, and bring the best solutions to any team or company I'm a part of.
+      </p>
+    </section>
+
+    <section class="section-output">
+      <div class="terminal-header">~/filipe/skills $ <span class="typing-header">ls -F</span></div>
+      <h2 data-lang="pt">Minha Stack & Ferramentas</h2>
+      <h2 data-lang="en">My Stack & Tools</h2>
+
+      <p data-lang="pt">
+        Para construir sistemas robustos e análises inteligentes, eu utilizo:
+      </p>
+      <p data-lang="en">
+        To build robust systems and intelligent analyses, I use:
+      </p>
+      
+      <div style="margin-top: 15px;">
+        <span class="tech-tag">Python (Pandas, Scikit-learn)</span>
+        <span class="tech-tag">SQL & PL/SQL (Oracle)</span>
+        <span class="tech-tag">Machine Learning</span>
+        <span class="tech-tag">Generative AI (LLMs)</span>
+        <span class="tech-tag">ETL Engineering</span>
+        <span class="tech-tag">Power BI</span>
+        <span class="tech-tag">Salesforce API</span>
+        <span class="tech-tag">Data Storytelling</span>
+        <span class="tech-tag">Automation</span>
+      </div>
+    </section>
+
+    <section class="section-output">
+      <div class="terminal-header">~/filipe/projects $ <span class="typing-header">cat *.proj</span></div>
+      <h2 data-lang="pt">Projetos Recentes & Destaque</h2>
+      <h2 data-lang="en">Recent & Featured Projects</h2>
+
+      <div class="project-list">
+        
+        <a href="https://github.com/filipoow/projeto-ml-alocacao" target="_blank" class="project-item">
+          <div class="project-meta" data-lang="pt">Omie | ML | Python</div>
+          <div class="project-meta" data-lang="en">Omie | ML | Python</div>
+          <span class="project-title" data-lang="pt">Modelo de Alocação Inteligente de Franquias (ML)</span>
+          <span class="project-title" data-lang="en">Intelligent Franchise Allocation Model (ML)</span>
+          <span class="project-desc" data-lang="pt">
+            Desenvolvimento de um modelo de Machine Learning para otimizar a alocação de novos clientes às franquias da Omie, elevando a taxa de sucesso.
+          </span>
+          <span class="project-desc" data-lang="en">
+            Development of a Machine Learning model to optimize the allocation of new clients to Omie franchises, increasing their success rate.
+          </span>
+          <div style="margin-top: 10px;">
+            <span class="tech-tag">ML</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Optimization</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/filipoow/chatbot-omie-ia" target="_blank" class="project-item">
+          <div class="project-meta" data-lang="pt">Omie | IA | Python</div>
+          <div class="project-meta" data-lang="en">Omie | AI | Python</div>
+          <span class="project-title" data-lang="pt">Chatbot com IA para Conhecimento Interno (LLMs)</span>
+          <span class="project-title" data-lang="en">AI Chatbot for Internal Knowledge (LLMs)</span>
+          <span class="project-desc" data-lang="pt">
+            Criação de um chatbot utilizando LLMs para permitir que o time interno consulte a base de conhecimento de forma rápida e eficiente, otimizando o atendimento.
+          </span>
+          <span class="project-desc" data-lang="en">
+            Development of an LLM-powered chatbot to allow the internal team to quickly and efficiently query the knowledge base, optimizing support.
+          </span>
+          <div style="margin-top: 10px;">
+            <span class="tech-tag">Generative AI</span>
+            <span class="tech-tag">LLMs</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Knowledge Base</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-item">
+          <div class="project-meta" data-lang="pt">Jadlog | ETL & Engenharia</div>
+          <div class="project-meta" data-lang="en">Jadlog | ETL & Engineering</div>
+          <span class="project-title" data-lang="pt">Estrutura de ETL para Monitoramento de KPIs Comerciais</span>
+          <span class="project-title" data-lang="en">ETL Structure for Commercial KPI Monitoring</span>
+          <span class="project-desc" data-lang="pt">
+            Desenho da estrutura de banco de dados comercial e implementação de processos ETL (PL/SQL, Python, Spark, Airflow) para consolidar dados e garantir o monitoramento efetivo de KPIs.
+          </span>
+          <span class="project-desc" data-lang="en">
+            Designed the commercial database structure and implemented ETL processes (PL/SQL, Python, Spark, Airflow) to consolidate data and ensure effective KPI monitoring.
+          </span>
+          <div style="margin-top: 10px;">
+            <span class="tech-tag">PL/SQL</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Spark</span>
+            <span class="tech-tag">Airflow</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/filipoow/automacao-frete-jadlog" target="_blank" class="project-item">
+          <div class="project-meta" data-lang="pt">Jadlog | Automação</div>
+          <div class="project-meta" data-lang="en">Jadlog | Automation</div>
+          <span class="project-title" data-lang="pt">Automação de Tabela de Preços de Frete (VTEX, Intelipost)</span>
+          <span class="project-title" data-lang="en">Freight Price Table Automation (VTEX, Intelipost)</span>
+          <span class="project-desc" data-lang="pt">
+            Criação de Batch Scripts em Python (Pandas) para formatar a tabela de preços de frete para plataformas como VTEX, Intelipost e Loja Integrada, reduzindo horas de trabalho manual.
+          </span>
+          <span class="project-desc" data-lang="en">
+            Built Python Batch Scripts (Pandas) to format the freight price tables for platforms like VTEX, Intelipost, and Loja Integrada, reducing hours of manual work.
+          </span>
+          <div style="margin-top: 10px;">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">Xlsxwriter</span>
+            <span class="tech-tag">Automação</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-item">
+          <div class="project-meta" data-lang="pt">Jadlog | CRM & Qualidade de Dados</div>
+          <div class="project-meta" data-lang="en">Jadlog | CRM & Data Quality</div>
+          <span class="project-title" data-lang="pt">Gerenciamento de Dados e Integração Salesforce</span>
+          <span class="project-title" data-lang="en">Salesforce Data Management and Integration</span>
+          <span class="project-desc" data-lang="pt">
+            Gerenciamento e integração eficiente de dados no Salesforce utilizando SOQL, Python, Salesforce API e ViaCep API. Implementação de rotinas de limpeza e validação para manter o CRM preciso.
+          </span>
+          <span class="project-desc" data-lang="en">
+            Efficient data management and integration in Salesforce using SOQL, Python, Salesforce API, and ViaCep API. Implemented cleaning and validation routines to maintain CRM accuracy.
+          </span>
+          <div style="margin-top: 10px;">
+            <span class="tech-tag">Salesforce</span>
+            <span class="tech-tag">SOQL</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Data Quality</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-item">
+          <div class="project-meta" data-lang="pt">Jadlog | BI & Análise</div>
+          <div class="project-meta" data-lang="en">Jadlog | BI & Analysis</div>
+          <span class="project-title" data-lang="pt">Insights e Dashboards Personalizados com PowerBI</span>
+          <span class="project-title" data-lang="en">Custom Insights and Dashboards with PowerBI</span>
+          <span class="project-desc" data-lang="pt">
+            Aprimoramento das Operações Comerciais no Salesforce através do desenvolvimento de KPIs, análise de pipeline e criação de insights personalizados com o uso do Power BI.
+          </span>
+          <span class="project-desc" data-lang="en">
+            Enhanced Commercial Operations within Salesforce by developing KPIs, pipeline analysis, and creating custom insights using Power BI.
+          </span>
+          <div style="margin-top: 10px;">
+            <span class="tech-tag">Power BI</span>
+            <span class="tech-tag">DAX</span>
+            <span class="tech-tag">Salesforce</span>
+            <span class="tech-tag">KPIs</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2 data-lang="pt">E então, vamos construir algo incrível?</h2>
+      <h2 data-lang="en">So, shall we build something amazing?</h2>
+      
+      <p data-lang="pt">
+        Estou sempre em busca de novos desafios e ambientes onde minha paixão por dados, programação e inovação possa gerar impacto real. Se você busca um resolvedor de problemas com visão estratégica, meu terminal está aberto.
+      </p>
+      <p data-lang="en">
+        I am always looking for new challenges and environments where my passion for data, programming, and innovation can generate real impact. If you are looking for a problem-solver with a strategic vision, my terminal is open.
+      </p>
+
+      <div class="cta-actions">
+          <a href="https://calendly.com/emaildofilipe-m/30min" target="_blank" class="btn-terminal btn-main" data-lang="pt">
+              Agendar Reunião >_
+          </a>
+          <a href="https://calendly.com/emaildofilipe-m/30min" target="_blank" class="btn-terminal btn-main" data-lang="en">
+              Book a Meeting >_
+          </a>
+
+          <a href="mailto:fmartins.nascimento@outlook.com" class="btn-secondary" data-lang="pt">
+              Enviar um E-mail
+          </a>
+          <a href="mailto:fmartins.nascimento@outlook.com" class="btn-secondary" data-lang="en">
+              Send an Email
+          </a>
+      </div>
+
+      <div class="social-links">
+        <a href="https://linkedin.com/in/filipoow" target="_blank">linkedin.com/in/filipoow</a>
+        <a href="https://github.com/filipoow" target="_blank">github.com/filipoow</a>
+      </div>
+    </section>
+
+    <footer>
+      <p data-lang="pt">filipe.martins-dev // All systems operational. // &copy; 2025</p>
+      <p data-lang="en">filipe.martins-dev // All systems operational. // &copy; 2025</p>
+    </footer>
+
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
