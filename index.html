@@ -45,6 +45,25 @@
 
       <img src="img/filipe-perfil.jpg" alt="Filipe Martins" class="avatar-floating">
     </section>
+    
+    <div class="audio-player-terminal">
+      <audio id="story-audio" src="audio/minha_historia.mp3" preload="none"></audio>
+
+      <div class="audio-control-line" id="audio-control-line">
+          <span class="prompt-text" id="dynamic-prompt-text"></span>
+
+          <a href="#" id="audio-link" class="audio-action-link">
+              <span data-lang="pt">play_story.sh</span>
+              <span data-lang="en">play_story.sh</span>
+          </a>
+      </div>
+
+      <span id="next-chapter-hook" class="audio-status-message status-hook" style="display:none;">
+        <span data-lang="pt">[ECHO] Qual será o próximo capítulo? <a href="#cta-section">Agende um bate-papo</a> para descobrir!</span>
+        <span data-lang="en">[ECHO] What will be the next chapter? <a href="#cta-section">Book a call</a> to find out!</span>
+      </span>
+
+    </div>
 
     <section class="section-output">
       <div class="terminal-header">~/filipe/bio $ <span class="typing-header">cat my_story.txt</span></div>

@@ -572,3 +572,68 @@ footer {
     color: var(--color-accent);
     border-bottom-color: var(--color-accent);
 }
+
+/* --- NOVO ÁUDIO PLAYER TERMINAL STYLE --- */
+
+.audio-player-terminal {
+    background-color: var(--bg-light-surface);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 30px;
+}
+
+.audio-control-line {
+    font-family: var(--font-monospace);
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.prompt-text {
+    color: var(--color-accent); /* Cor do usuário/caminho, Ex: guest@filipe:/audio $ */
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.audio-action-link {
+    color: var(--color-terminal);
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 1px dashed var(--color-terminal); /* Simula um link de terminal */
+    display: inline-block;
+    padding: 0; 
+    background: none; 
+}
+.audio-action-link:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
+/* Efeito de Blinking para Status Ativo (Reutiliza a animação do cursor) */
+.blinking {
+    /* O JS adiciona esta classe quando o áudio está rodando/carregando */
+    animation: blink-caret .75s step-end infinite;
+}
+
+/* Mensagem de gancho (Next Chapter Hook) */
+#next-chapter-hook {
+    font-family: var(--font-monospace);
+    color: var(--color-accent); 
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+    border: none;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+}
+#next-chapter-hook a {
+    color: var(--color-terminal); 
+    font-weight: 700;
+    border-bottom: 1px dashed var(--color-terminal);
+}
+#next-chapter-hook a:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
