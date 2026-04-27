@@ -18,7 +18,20 @@ const systemStyles = {
   },
 };
 
+function useMobile() {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 1024);
+  React.useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener("resize", handler);
+    // trigger check once
+    handler();
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isMobile;
+}
+
 function SystemNav({ lang, setLang, t }) {
+  const isMobile = useMobile();
   const [time, setTime] = React.useState(new Date());
   React.useEffect(() => {
     const i = setInterval(() => setTime(new Date()), 60000);
@@ -28,17 +41,20 @@ function SystemNav({ lang, setLang, t }) {
 
   return (
     <nav style={{
-      display: "grid",
-      gridTemplateColumns: "1fr auto 1fr",
+      display: isMobile ? "flex" : "grid",
+      flexDirection: isMobile ? "row" : undefined,
+      justifyContent: isMobile ? "space-between" : undefined,
+      gridTemplateColumns: isMobile ? undefined : "1fr auto 1fr",
+      gap: isMobile ? 12 : 0,
       alignItems: "center",
-      padding: "20px 32px",
+      padding: isMobile ? "16px 20px" : "20px 32px",
       borderBottom: `1px solid ${INK_B}10`,
       fontFamily: "'JetBrains Mono', ui-monospace, monospace",
       fontSize: 12,
       background: SURFACE_B,
       position: "sticky", top: 0, zIndex: 10,
     }}>
-      <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+      <div style={{ display: "flex", gap: isMobile ? 12 : 24, alignItems: "center" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{
             width: 22, height: 22,
@@ -49,19 +65,21 @@ function SystemNav({ lang, setLang, t }) {
             fontSize: 13, fontWeight: 700,
           }}>F</div>
           <span style={{ fontWeight: 600, letterSpacing: "-0.01em" }}>filipe.martins</span>
-          <span style={{ color: MUTED_B }}>/v3.0</span>
+          {!isMobile && <span style={{ color: MUTED_B }}>/v3.0</span>}
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, color: MUTED_B }}>
-          <span style={{
-            width: 6, height: 6, borderRadius: "50%",
-            background: ACCENT_B,
-            boxShadow: `0 0 0 3px ${ACCENT_B}30`,
-          }} />
-          <span>online · São Paulo {tStr}</span>
-        </div>
+        {!isMobile && (
+          <div style={{ display: "flex", alignItems: "center", gap: 6, color: MUTED_B }}>
+            <span style={{
+              width: 6, height: 6, borderRadius: "50%",
+              background: ACCENT_B,
+              boxShadow: `0 0 0 3px ${ACCENT_B}30`,
+            }} />
+            <span>online · São Paulo {tStr}</span>
+          </div>
+        )}
       </div>
 
-      <div style={{ display: "flex", gap: 4 }}>
+      <div style={{ display: isMobile ? "none" : "flex", gap: 4 }}>
         {["work", "about", "services", "contact"].map(k => (
           <a key={k} href={`#${k}`} style={{
             padding: "8px 14px",
@@ -74,8 +92,8 @@ function SystemNav({ lang, setLang, t }) {
         ))}
       </div>
 
-      <div style={{ display: "flex", justifyContent: "flex-end", gap: 12, alignItems: "center" }}>
-        <div style={{ display: "flex", border: `1px solid ${INK_B}20`, borderRadius: 6, overflow: "hidden" }}>
+      <div style={{ display: "flex", justifyContent: "flex-end", gap: isMobile ? 8 : 12, alignItems: "center" }}>
+        <div style={{ display: "flex", border: `1px solid ${INK_B}20`, borderRadius: 6, overflow: "hidden", display: isMobile ? "none" : "flex" }}>
           <button onClick={() => setLang("pt")} style={{
             padding: "5px 12px", border: "none",
             background: lang === "pt" ? INK_B : "transparent",
@@ -95,7 +113,7 @@ function SystemNav({ lang, setLang, t }) {
           textDecoration: "none", fontSize: 12, fontWeight: 500,
           display: "inline-flex", gap: 6, alignItems: "center",
         }}>
-          {t.hero.cta1} <span>↗</span>
+          {isMobile ? "Agendar" : t.hero.cta1} <span>↗</span>
         </a>
       </div>
     </nav>
@@ -129,8 +147,9 @@ function MetricCard({ label, value, sub, accent }) {
 }
 
 function SystemHero({ t, lang }) {
+  const isMobile = useMobile();
   return (
-    <section style={{ padding: "48px 32px 24px" }}>
+    <section style={{ padding: isMobile ? "32px 20px 16px" : "48px 32px 24px" }}>
       <div style={{
         display: "inline-flex", alignItems: "center", gap: 8,
         padding: "6px 12px", borderRadius: 999,
@@ -138,7 +157,7 @@ function SystemHero({ t, lang }) {
         color: ACCENT_DEEP,
         fontFamily: "'JetBrains Mono', monospace",
         fontSize: 11, fontWeight: 600,
-        marginBottom: 32,
+        marginBottom: isMobile ? 24 : 32, gap: isMobile ? 16 : 0,
       }}>
         <span style={{
           width: 6, height: 6, borderRadius: "50%",
@@ -147,10 +166,10 @@ function SystemHero({ t, lang }) {
         {t.hero.availability.toUpperCase()}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 56, alignItems: "start" }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.5fr 1fr", gap: isMobile ? 40 : 56, alignItems: "start" }}>
         <div>
           <h1 style={{
-            fontSize: 88,
+            fontSize: isMobile ? 54 : 88,
             lineHeight: 0.95,
             letterSpacing: "-0.045em",
             fontWeight: 500,
@@ -163,7 +182,7 @@ function SystemHero({ t, lang }) {
             fontSize: 19, lineHeight: 1.5,
             color: MUTED_B,
             maxWidth: 580,
-            margin: "0 0 36px",
+            margin: isMobile ? "0 0 24px" : "0 0 36px",
           }}>{t.hero.subtitle}</p>
           <div style={{ display: "flex", gap: 12 }}>
             <a href={window.SITE_LINKS.calendly} target="_blank" style={{
@@ -215,9 +234,9 @@ function SystemHero({ t, lang }) {
       {/* métricas pessoais */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
         gap: 12,
-        marginTop: 48,
+        marginTop: isMobile ? 32 : 48,
       }}>
         <MetricCard label="experiência em dados" value="5 anos" sub="2021 → hoje" />
         <MetricCard label="cases entregues" value="20+" sub="Omie · Jadlog · Filka" />
@@ -229,8 +248,9 @@ function SystemHero({ t, lang }) {
 }
 
 function SystemAbout({ t }) {
+  const isMobile = useMobile();
   return (
-    <section id="about" style={{ padding: "32px" }}>
+    <section id="about" style={{ padding: isMobile ? "20px" : "32px" }}>
       <div style={{
         background: SURFACE_B,
         borderRadius: 14,
@@ -249,15 +269,15 @@ function SystemAbout({ t }) {
           <span>about.md</span>
         </div>
         <div style={{
-          padding: "40px",
+          padding: isMobile ? "24px" : "40px",
           display: "grid",
-          gridTemplateColumns: "260px 1fr",
-          gap: 56,
+          gridTemplateColumns: isMobile ? "1fr" : "260px 1fr",
+          gap: isMobile ? 32 : 56,
           alignItems: "start",
         }}>
           <div>
             <div style={{
-              aspectRatio: "1",
+              aspectRatio: isMobile ? "1" : "1", height: isMobile ? 260 : "auto", objectFit: "cover",
               background: `url('assets/filipe.jpg') center/cover`,
               borderRadius: 12,
               filter: "saturate(0.85)",
@@ -285,7 +305,7 @@ function SystemAbout({ t }) {
           </div>
           <div>
             <p style={{
-              fontSize: 22, lineHeight: 1.55,
+              fontSize: isMobile ? 18 : 22, lineHeight: 1.55,
               margin: 0,
               letterSpacing: "-0.005em",
               textWrap: "pretty",
@@ -298,9 +318,10 @@ function SystemAbout({ t }) {
 }
 
 function SystemServices({ t }) {
+  const isMobile = useMobile();
   return (
-    <section id="services" style={{ padding: "48px 32px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "end", marginBottom: 32 }}>
+    <section id="services" style={{ padding: isMobile ? "32px 20px" : "48px 32px" }}>
+      <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "flex-end", marginBottom: 32 }}>
         <div>
           <div style={{
             fontFamily: "'JetBrains Mono', monospace",
@@ -308,14 +329,14 @@ function SystemServices({ t }) {
             letterSpacing: "0.08em", textTransform: "uppercase",
           }}>// services</div>
           <h2 style={{
-            fontSize: 56, lineHeight: 1, letterSpacing: "-0.035em",
+            fontSize: isMobile ? 42 : 56, lineHeight: 1, letterSpacing: "-0.035em",
             fontWeight: 500, margin: 0,
           }}>{t.services.title}</h2>
         </div>
         <p style={{ fontSize: 16, color: MUTED_B, maxWidth: 320, margin: 0 }}>{t.services.subtitle}</p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: 16 }}>
         {t.services.items.map((s, i) => (
           <div key={i} style={{
             background: SURFACE_B,
@@ -326,7 +347,7 @@ function SystemServices({ t }) {
             position: "relative",
             overflow: "hidden",
           }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "center", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 16 : 0 }}>
               <span style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: 11, color: MUTED_B,
@@ -360,8 +381,9 @@ function SystemServices({ t }) {
 }
 
 function SystemCases({ t }) {
+  const isMobile = useMobile();
   return (
-    <section id="work" style={{ padding: "48px 32px" }}>
+    <section id="work" style={{ padding: isMobile ? "32px 20px" : "48px 32px" }}>
       <div style={{ marginBottom: 32 }}>
         <div style={{
           fontFamily: "'JetBrains Mono', monospace",
@@ -369,28 +391,28 @@ function SystemCases({ t }) {
           letterSpacing: "0.08em", textTransform: "uppercase",
         }}>// case_studies</div>
         <h2 style={{
-          fontSize: 64, lineHeight: 1, letterSpacing: "-0.035em",
+          fontSize: isMobile ? 42 : 64, lineHeight: 1, letterSpacing: "-0.035em",
           fontWeight: 500, margin: 0,
         }}>{t.cases.title}</h2>
         <p style={{ fontSize: 17, color: MUTED_B, marginTop: 12, marginBottom: 0 }}>{t.cases.subtitle}</p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 16 }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(6, 1fr)", gap: isMobile ? 24 : 16 }}>
         {t.cases.items.map((c, i) => {
           // first card big, others smaller
           const big = i === 0;
           return (
             <div key={i} style={{
-              gridColumn: big ? "span 6" : "span 3",
+              gridColumn: isMobile ? "1 / -1" : (big ? "span 6" : "span 3"),
               background: big ? INK_B : SURFACE_B,
               color: big ? PAPER_B : INK_B,
               borderRadius: 14,
-              padding: big ? 36 : 24,
+              padding: isMobile ? (big ? 28 : 24) : (big ? 36 : 24),
               border: big ? "none" : `1px solid ${INK_B}10`,
               display: "grid",
-              gridTemplateColumns: big ? "1.4fr 1fr" : "1fr",
+              gridTemplateColumns: (big && !isMobile) ? "1.4fr 1fr" : "1fr",
               gap: big ? 40 : 16,
-              minHeight: big ? 280 : 220,
+              minHeight: isMobile ? "auto" : (big ? 280 : 220),
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 <div style={{
@@ -405,7 +427,7 @@ function SystemCases({ t }) {
                   <span>{c.year}</span>
                 </div>
                 <h3 style={{
-                  fontSize: big ? 38 : 22,
+                  fontSize: (big && !isMobile) ? 38 : 26,
                   fontWeight: 500,
                   letterSpacing: "-0.025em",
                   lineHeight: 1.05,
@@ -433,12 +455,12 @@ function SystemCases({ t }) {
               <div style={{
                 display: "flex", flexDirection: "column",
                 justifyContent: big ? "center" : "flex-start",
-                alignItems: big ? "flex-end" : "flex-start",
+                alignItems: (big && !isMobile) ? "flex-end" : "flex-start",
                 gap: 4,
-                ...(big ? {} : { marginTop: -4 }),
+                ...((big && !isMobile) ? {} : { marginTop: -4 }),
               }}>
                 <div style={{
-                  fontSize: big ? 96 : 44,
+                  fontSize: (big && !isMobile) ? 96 : 44,
                   lineHeight: 1,
                   fontWeight: 500,
                   letterSpacing: "-0.04em",
@@ -448,7 +470,7 @@ function SystemCases({ t }) {
                 <div style={{
                   fontSize: big ? 14 : 12,
                   color: big ? `${PAPER_B}90` : MUTED_B,
-                  textAlign: big ? "right" : "left",
+                  textAlign: (big && !isMobile) ? "right" : "left",
                   maxWidth: big ? 200 : "100%",
                   lineHeight: 1.4,
                 }}>{c.metricLabel}</div>
@@ -462,8 +484,9 @@ function SystemCases({ t }) {
 }
 
 function SystemTimeline({ t }) {
+  const isMobile = useMobile();
   return (
-    <section style={{ padding: "48px 32px" }}>
+    <section style={{ padding: isMobile ? "32px 20px" : "48px 32px" }}>
       <div style={{
         background: SURFACE_B,
         border: `1px solid ${INK_B}10`,
@@ -481,23 +504,26 @@ function SystemTimeline({ t }) {
           <span>// timeline.log</span>
           <span>5 entries · 2021–2026</span>
         </div>
-        <div style={{ padding: "32px 40px" }}>
+        <div style={{ padding: isMobile ? "24px 20px" : "32px 40px" }}>
           <h2 style={{
-            fontSize: 48, lineHeight: 1, letterSpacing: "-0.035em",
+            fontSize: isMobile ? 36 : 48, lineHeight: 1, letterSpacing: "-0.035em",
             fontWeight: 500, margin: "0 0 32px",
           }}>{t.timeline.title}</h2>
-          <div style={{ display: "flex", gap: 0, position: "relative" }}>
+          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: 0, position: "relative" }}>
             {t.timeline.items.map((item, i) => {
               const isCurrent = i === t.timeline.items.length - 1;
               return (
                 <div key={i} style={{
                   flex: 1, position: "relative",
-                  paddingTop: 32,
-                  borderTop: `1px solid ${INK_B}20`,
+                  paddingTop: isMobile ? 0 : 32,
+                  paddingLeft: isMobile ? 24 : 0,
+                  paddingBottom: isMobile ? 32 : 0,
+                  borderTop: isMobile ? "none" : `1px solid ${INK_B}20`,
+                  borderLeft: isMobile ? `1px solid ${INK_B}20` : "none",
                 }}>
                   <div style={{
                     position: "absolute",
-                    top: -7, left: 0,
+                    top: isMobile ? 0 : -7, left: isMobile ? -7 : 0,
                     width: 13, height: 13, borderRadius: "50%",
                     background: isCurrent ? ACCENT_B : INK_B,
                     boxShadow: isCurrent ? `0 0 0 4px ${ACCENT_B}40` : "none",
@@ -530,8 +556,9 @@ function SystemTimeline({ t }) {
 }
 
 function SystemStack({ t }) {
+  const isMobile = useMobile();
   return (
-    <section style={{ padding: "48px 32px" }}>
+    <section style={{ padding: isMobile ? "32px 20px" : "48px 32px" }}>
       <div style={{ marginBottom: 24 }}>
         <div style={{
           fontFamily: "'JetBrains Mono', monospace",
@@ -539,11 +566,11 @@ function SystemStack({ t }) {
           letterSpacing: "0.08em", textTransform: "uppercase",
         }}>// stack</div>
         <h2 style={{
-          fontSize: 56, lineHeight: 1, letterSpacing: "-0.035em",
+          fontSize: isMobile ? 42 : 56, lineHeight: 1, letterSpacing: "-0.035em",
           fontWeight: 500, margin: 0,
         }}>{t.stack.title}</h2>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 12 }}>
         {t.stack.groups.map((g, i) => (
           <div key={i} style={{
             background: SURFACE_B,
@@ -577,25 +604,26 @@ function SystemStack({ t }) {
 }
 
 function SystemTestimonials({ t }) {
+  const isMobile = useMobile();
   return (
-    <section style={{ padding: "48px 32px" }}>
+    <section style={{ padding: isMobile ? "32px 20px" : "48px 32px" }}>
       <div style={{
         background: INK_B,
         color: PAPER_B,
         borderRadius: 14,
-        padding: "48px",
+        padding: isMobile ? "32px 24px" : "48px",
       }}>
         <div style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 11, color: ACCENT_B, marginBottom: 24,
           letterSpacing: "0.08em", textTransform: "uppercase",
         }}>// {t.testimonials.title}</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48 }}>
           {t.testimonials.items.map((tt, i) => (
             <div key={i}>
               <div style={{
                 color: ACCENT_B,
-                fontSize: 56, lineHeight: 0.6,
+                fontSize: isMobile ? 42 : 56, lineHeight: 0.6,
                 marginBottom: 16, fontFamily: "Georgia, serif",
               }}>"</div>
               <p style={{
@@ -637,9 +665,10 @@ function SystemTestimonials({ t }) {
 }
 
 function SystemFAQ({ t }) {
+  const isMobile = useMobile();
   const [open, setOpen] = React.useState(0);
   return (
-    <section style={{ padding: "48px 32px" }}>
+    <section style={{ padding: isMobile ? "32px 20px" : "48px 32px" }}>
       <div style={{ marginBottom: 24 }}>
         <div style={{
           fontFamily: "'JetBrains Mono', monospace",
@@ -659,7 +688,7 @@ function SystemFAQ({ t }) {
       }}>
         {t.faq.items.map((f, i) => (
           <div key={i} onClick={() => setOpen(open === i ? -1 : i)} style={{
-            padding: "20px 24px",
+            padding: isMobile ? "16px 20px" : "20px 24px",
             cursor: "pointer",
             borderTop: i === 0 ? "none" : `1px solid ${INK_B}10`,
             background: open === i ? PAPER_B : "transparent",
@@ -696,13 +725,14 @@ function SystemFAQ({ t }) {
 }
 
 function SystemContact({ t }) {
+  const isMobile = useMobile();
   return (
-    <section id="contact" style={{ padding: "48px 32px 32px" }}>
+    <section id="contact" style={{ padding: isMobile ? "32px 20px 24px" : "48px 32px 32px" }}>
       <div style={{
         background: ACCENT_B,
         color: ACCENT_DEEP,
         borderRadius: 14,
-        padding: "72px 48px",
+        padding: isMobile ? "40px 24px" : "72px 48px",
         position: "relative",
         overflow: "hidden",
       }}>
@@ -721,18 +751,18 @@ function SystemContact({ t }) {
             opacity: 0.7,
           }}>// {t.contact.title}</div>
           <h2 style={{
-            fontSize: 88, lineHeight: 0.95,
+            fontSize: isMobile ? 48 : 88, lineHeight: 0.95,
             letterSpacing: "-0.04em",
             fontWeight: 500,
             margin: "0 0 24px",
           }}>{t.contact.title}.</h2>
           <p style={{
             fontSize: 19, lineHeight: 1.5,
-            margin: "0 0 36px",
+            margin: isMobile ? "0 0 24px" : "0 0 36px",
             opacity: 0.85,
             maxWidth: 540,
           }}>{t.contact.subtitle}</p>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: 12, flexWrap: "wrap", alignItems: isMobile ? "stretch" : "flex-start" }}>
             <a href={window.SITE_LINKS.calendly} target="_blank" style={{
               background: ACCENT_DEEP, color: ACCENT_B,
               padding: "16px 26px", borderRadius: 8,
@@ -753,21 +783,25 @@ function SystemContact({ t }) {
 
       <footer style={{
         marginTop: 24,
-        padding: "20px 24px",
+        padding: isMobile ? "24px 20px" : "20px 24px",
         background: INK_B,
         color: PAPER_B,
         borderRadius: 14,
-        display: "flex", justifyContent: "space-between", alignItems: "center",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: isMobile ? "flex-start" : "center",
+        flexDirection: isMobile ? "column" : "row",
+        gap: isMobile ? 24 : 0,
         fontFamily: "'JetBrains Mono', monospace",
         fontSize: 11,
       }}>
-        <span style={{ opacity: 0.6 }}>{t.footer.tagline}</span>
-        <div style={{ display: "flex", gap: 20 }}>
+        <span style={{ opacity: 0.6, maxWidth: 220, lineHeight: 1.4 }}>{t.footer.tagline}</span>
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 20 }}>
           <a href={window.SITE_LINKS.linkedin} target="_blank" style={{ color: PAPER_B, textDecoration: "none" }}>linkedin ↗</a>
           <a href={window.SITE_LINKS.github} target="_blank" style={{ color: PAPER_B, textDecoration: "none" }}>github ↗</a>
           <a href={window.SITE_LINKS.filka} target="_blank" style={{ color: ACCENT_B, textDecoration: "none" }}>filka.studio ↗</a>
         </div>
-        <span style={{ opacity: 0.4 }}>{t.footer.rights}</span>
+        <span style={{ opacity: 0.4, maxWidth: 220, lineHeight: 1.4, textAlign: isMobile ? "left" : "right" }}>{t.footer.rights}</span>
       </footer>
     </section>
   );
