@@ -1,415 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Filipe Martins | Dev & Data Solver</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Filipe Martins — Sr. Analytics Engineer</title>
+<meta name="description" content="Analytics Engineer Sênior. Pipelines em Databricks, modelos de ML em produção e agentes de IA generativa. Cofundador da Filka Studio." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter Tight', 'Helvetica Neue', sans-serif;
+    background: #F4F4F0;
+    color: #0B0F0E;
+    -webkit-font-smoothing: antialiased;
+  }
+  * { box-sizing: border-box; }
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  .cursor-blink { animation: blink 1s steps(1) infinite; }
+  a { transition: opacity 0.2s, color 0.2s; }
+  a:hover { opacity: 0.75; }
+  button { transition: opacity 0.2s; }
+  button:hover { opacity: 0.85; }
+  html { scroll-behavior: smooth; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
-<body class="lang-pt">
+<body>
+<div id="root"></div>
 
-  <div class="container">
-    
-    <header>
-      <a href="#" class="brand">filipe.martins-dev</a>
-      <div class="lang-switcher">
-        <button class="lang-btn active" data-lang-target="pt">PT</button>
-        <button class="lang-btn" data-lang-target="en">EN</button>
-      </div>
-    </header>
-
-    <section class="hero">
-      <div class="terminal-prompt">
-        <span class="typing" data-lang="pt">bem-vindo-filipe-dev</span>
-        <span class="typing" data-lang="en">welcome-filipe-dev</span>
-      </div>
-
-      <h1 class="hero-title" data-lang="pt">
-        <span class="highlight">Filipe Martins</span>: Transformando complexidade em soluções eficientes.
-      </h1>
-      <h1 class="hero-title" data-lang="en">
-        <span class="highlight">Filipe Martins</span>: Turning complexity into efficient solutions.
-      </h1>
-      
-      <p class="hero-description" data-lang="pt">
-        Desenvolvedor e Analista de Dados com paixão por desvendar sistemas complexos e construir ferramentas que realmente fazem a diferença na vida das pessoas e nas operações.
-      </p>
-      <p class="hero-description" data-lang="en">
-        Developer and Data Analyst with a passion for unraveling complex systems and building tools that truly make a difference in people's lives and operations.
-      </p>
-
-      <img src="img/filipe-perfil.jpg" alt="Filipe Martins" class="avatar-floating">
-    </section>
-    
-    <div class="audio-player-terminal">
-      <audio id="story-audio" src="audio/minha_historia.mp3" preload="none"></audio>
-
-      <div class="audio-control-line" id="audio-control-line">
-          <span class="prompt-text" id="dynamic-prompt-text"></span>
-
-          <a href="#" id="audio-link" class="audio-action-link">
-              <span data-lang="pt">play_story.sh</span>
-              <span data-lang="en">play_story.sh</span>
-          </a>
-      </div>
-
-      <span id="next-chapter-hook" class="audio-status-message status-hook" style="display:none;">
-        <span data-lang="pt">[ECHO] Qual será o próximo capítulo? <a href="#cta-section">Agende um bate-papo</a> para descobrir!</span>
-        <span data-lang="en">[ECHO] What will be the next chapter? <a href="#cta-section">Book a call</a> to find out!</span>
-      </span>
-
-    </div>
-
-    <section class="section-output">
-      <div class="terminal-header">~/filipe/bio $ <span class="typing-header">cat my_story.txt</span></div>
-      <h2 data-lang="pt">Minha História: Do Quebra-Cabeça ao Código</h2>
-      <h2 data-lang="en">My Story: From Puzzles to Code</h2>
-      
-      <p data-lang="pt">
-        A programação, para mim, sempre foi a extensão natural da minha paixão por quebra-cabeças. Desde cedo, fui atraído pela lógica e pela arte de desvendar sistemas complexos. No entanto, minha jornada profissional começou em um lugar inesperado: o backoffice comercial da <strong>Jadlog</strong>.
-      </p>
-      <p data-lang="en">
-        Programming, for me, has always been the natural extension of my passion for puzzles. Early on, I was drawn to the logic and art of unraveling complex systems. However, my professional journey began in an unexpected place: the commercial backoffice at <strong>Jadlog</strong>.
-      </p>
-
-      <p data-lang="pt">
-        Lá, eu me deparei com um cenário comum: processos manuais exaustivos, planilhas massivas e uma dependência que roubava tempo e produtividade. Vendo as dificuldades da equipe, o "desenvolvedor" dentro de mim viu uma oportunidade de otimizar. Comecei a desenvolver soluções e automações por conta própria, transformando o que era tedioso em eficiente.
-      </p>
-      <p data-lang="en">
-        There, I encountered a common scenario: exhaustive manual processes, massive spreadsheets, and a dependency that stole time and productivity. Seeing the team's difficulties, the "developer" within me saw an opportunity to optimize. I started developing solutions and automations on my own, transforming what was tedious into efficient.
-      </p>
-      
-      <p data-lang="pt">
-        Essa iniciativa chamou a atenção, e meu gerente me convidou para integrar o <strong>Time de Dados</strong>. Foi ali que pude, de fato, aplicar e aprofundar meu conhecimento em engenharia de dados, Python e SQL. Na Jadlog, cresci de aprendiz a <strong>Analista de Dados Pleno</strong> em 3 anos, construindo projetos que realmente faziam a diferença na logística e nas operações comerciais.
-      </p>
-      <p data-lang="en">
-        This initiative caught attention, and my manager invited me to join the <strong>Data Team</strong>. It was there that I could truly apply and deepen my knowledge in data engineering, Python, and SQL. At Jadlog, I grew from an apprentice to a <strong>Mid-Level Data Analyst</strong> in 3 years, building projects that genuinely made a difference in logistics and commercial operations.
-      </p>
-
-      <p data-lang="pt">
-        Hoje, na <strong>Omie</strong>, estou explorando o universo SaaS e mergulhando em projetos ainda mais desafiadores, como <strong>Machine Learning</strong> para otimização de alocação de clientes e a criação de <strong>Chatbots com IA</strong> para agilizar o conhecimento interno. Minha motivação é constante: fazer a diferença, inovar e trazer as melhores soluções para qualquer equipe ou empresa em que eu esteja.
-      </p>
-      <p data-lang="en">
-        Today, at <strong>Omie</strong>, I'm exploring the SaaS universe and diving into even more challenging projects, such as <strong>Machine Learning</strong> for client allocation optimization and the creation of <strong>AI Chatbots</strong> to streamline internal knowledge. My motivation is constant: to make a difference, innovate, and bring the best solutions to any team or company I'm a part of.
-      </p>
-    </section>
-
-    <section class="section-output">
-      <div class="terminal-header">~/filipe/career $ <span class="typing-header">cat roles.log</span></div>
-      <h2 data-lang="pt">Trajetória e Evolução</h2>
-      <h2 data-lang="en">Trajectory & Evolution</h2>
-      <p data-lang="pt">
-            Aqui está um pouco do resumo da minha história:
-      </p>
-      <p data-lang="en">
-        To build robust systems and intelligent analyses, I use:
-      </p>
-      <div style="margin-top: 15px;">
-        <div class="log-entry log-old">
-          <span class="log-date">[2021-09-01]</span>
-          <span class="log-type">[INIT]</span>
-          <span class="log-company">Jadlog:</span>
-          <span class="log-message" data-lang="pt">Início da jornada como Aprendiz.</span>
-          <span class="log-message" data-lang="en">Started career as Apprentice.</span>
-        </div>
-
-        <div class="log-entry log-upgrade">
-          <span class="log-date">[2022-01-01]</span>
-          <span class="log-type">[UPGRADE]</span>
-          <span class="log-company">Jadlog:</span>
-          <span class="log-message" data-lang="pt">Promoção para Analista de Dados Júnior.</span>
-          <span class="log-message" data-lang="en">Promoted to Junior Data Analyst.</span>
-        </div>
-
-        <div class="log-entry log-upgrade">
-          <span class="log-date">[2022-07-01]</span>
-          <span class="log-type">[UPGRADE]</span>
-          <span class="log-company">Jadlog:</span>
-          <span class="log-message" data-lang="pt">Promoção para Analista de Dados Pleno.</span>
-          <span class="log-message" data-lang="en">Promoted to Mid-level Data Analyst.</span>
-        </div>
-
-        <div class="log-entry log-current">
-          <span class="log-date">[2024-07-01]</span>
-          <span class="log-type">[CURRENT]</span>
-          <span class="log-company">Omie:</span>
-          <span class="log-message" data-lang="pt">Novo desafio como Analista de Dados Pleno.</span>
-          <span class="log-message" data-lang="en">New challenge as Mid-level Data Analyst.</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-output">
-      <div class="terminal-header">~/filipe/skills $ <span class="typing-header">ls -F</span></div>
-      <h2 data-lang="pt">Minha Stack & Ferramentas</h2>
-      <h2 data-lang="en">My Stack & Tools</h2>
-
-      <p data-lang="pt">
-        Para construir sistemas robustos e análises inteligentes, eu utilizo:
-      </p>
-      <p data-lang="en">
-        To build robust systems and intelligent analyses, I use:
-      </p>
-      
-      <div style="margin-top: 15px;">
-        <span class="tech-tag">Python (Pandas, Scikit-learn)</span>
-        <span class="tech-tag">SQL & PL/SQL (Oracle)</span>
-        <span class="tech-tag">Machine Learning</span>
-        <span class="tech-tag">Generative AI (LLMs)</span>
-        <span class="tech-tag">ETL Engineering</span>
-        <span class="tech-tag">Power BI</span>
-        <span class="tech-tag">Salesforce API</span>
-        <span class="tech-tag">Data Storytelling</span>
-        <span class="tech-tag">Automation</span>
-      </div>
-    </section>
-
-    <section class="section-output">
-  <div class="terminal-header">~/filipe/kb $ <span class="typing-header">grep -i 'skills' database.doc</span></div>
-  <h2 data-lang="pt">Base de Conhecimento (Profundidade Técnica)</h2>
-  <h2 data-lang="en">Knowledge Base (Technical Depth)</h2>
-
-  <p data-lang="pt">
-    Minha proficiência técnica, detalhada por áreas de domínio e experiência prática:
-  </p>
-  <p data-lang="en">
-    My technical proficiency, detailed by domain areas and practical experience:
-  </p>
-
-  <div class="knowledge-grid">
-    
-    <div class="knowledge-item">
-      <h3 data-lang="pt">Engenharia de Dados (ETL)</h3>
-      <h3 data-lang="en">Data Engineering (ETL)</h3>
-      <span class="tech-tag">Airflow</span>
-      <span class="tech-tag">Spark</span>
-      <span class="tech-tag">PL/SQL</span>
-      <span class="tech-tag">AWS S3</span>
-      <p data-lang="pt">Experiência na construção e manutenção de pipelines robustos de ingestão e transformação, priorizando automação e monitoramento (CI/CD).</p>
-      <p data-lang="en">Experience building and maintaining robust ingestion and transformation pipelines, prioritizing automation and monitoring (CI/CD).</p>
-    </div>
-
-    <div class="knowledge-item">
-      <h3 data-lang="pt">Análise e BI</h3>
-      <h3 data-lang="en">Analysis and BI</h3>
-      <span class="tech-tag">Power BI</span>
-      <span class="tech-tag">DAX</span>
-      <span class="tech-tag">Data Storytelling</span>
-      <span class="tech-tag">KPI Definition</span>
-      <p data-lang="pt">Criação de dashboards dinâmicos e relatórios complexos, traduzindo dados brutos em insights de negócio acionáveis.</p>
-      <p data-lang="en">Creation of dynamic dashboards and complex reports, translating raw data into actionable business insights.</p>
-    </div>
-    
-    <div class="knowledge-item">
-      <h3 data-lang="pt">Programação & ML</h3>
-      <h3 data-lang="en">Programming & ML</h3>
-      <span class="tech-tag">Python (Avançado)</span>
-      <span class="tech-tag">Scikit-learn</span>
-      <span class="tech-tag">Regressão/Classificação</span>
-      <span class="tech-tag">LLMs/OpenAI API</span>
-      <p data-lang="pt">Foco em modelos de Machine Learning para otimização, e uso da Python API para automatizar processos de dados.</p>
-      <p data-lang="en">Focus on Machine Learning models for optimization, and using the Python API to automate data processes.</p>
-    </div>
-
-  </div>
-</section>
-
-    <section class="section-output">
-      <div class="terminal-header">~/filipe/projects $ <span class="typing-header">cat *.proj</span></div>
-      <h2 data-lang="pt">Projetos Recentes & Destaque</h2>
-      <h2 data-lang="en">Recent & Featured Projects</h2>
-
-      <div class="project-list">
-        
-        <a href="#" target="_blank" class="project-item">
-          <div class="project-meta" data-lang="pt">Omie | ML | Python</div>
-          <div class="project-meta" data-lang="en">Omie | ML | Python</div>
-          <span class="project-title" data-lang="pt">Modelo de Alocação Inteligente de Franquias (ML)</span>
-          <span class="project-title" data-lang="en">Intelligent Franchise Allocation Model (ML)</span>
-          <span class="project-desc" data-lang="pt">
-            Desenvolvimento de um modelo de Machine Learning para otimizar a alocação de novos clientes às franquias da Omie, elevando a taxa de sucesso.
-          </span>
-          <span class="project-desc" data-lang="en">
-            Development of a Machine Learning model to optimize the allocation of new clients to Omie franchises, increasing their success rate.
-          </span>
-          <div style="margin-top: 10px;">
-            <span class="tech-tag">ML</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Optimization</span>
-          </div>
-        </a>
-
-        <a href="#" target="_blank" class="project-item">
-          <div class="project-meta" data-lang="pt">Omie | IA | Python</div>
-          <div class="project-meta" data-lang="en">Omie | AI | Python</div>
-          <span class="project-title" data-lang="pt">Chatbot com IA para Conhecimento Interno (LLMs)</span>
-          <span class="project-title" data-lang="en">AI Chatbot for Internal Knowledge (LLMs)</span>
-          <span class="project-desc" data-lang="pt">
-            Criação de um chatbot utilizando LLMs para permitir que o time interno consulte a base de conhecimento de forma rápida e eficiente, otimizando o atendimento.
-          </span>
-          <span class="project-desc" data-lang="en">
-            Development of an LLM-powered chatbot to allow the internal team to quickly and efficiently query the knowledge base, optimizing support.
-          </span>
-          <div style="margin-top: 10px;">
-            <span class="tech-tag">Generative AI</span>
-            <span class="tech-tag">LLMs</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Knowledge Base</span>
-          </div>
-        </a>
-
-        <a href="#" class="project-item">
-          <div class="project-meta" data-lang="pt">Jadlog | ETL & Engenharia</div>
-          <div class="project-meta" data-lang="en">Jadlog | ETL & Engineering</div>
-          <span class="project-title" data-lang="pt">Estrutura de ETL para Monitoramento de KPIs Comerciais</span>
-          <span class="project-title" data-lang="en">ETL Structure for Commercial KPI Monitoring</span>
-          <span class="project-desc" data-lang="pt">
-            Desenho da estrutura de banco de dados comercial e implementação de processos ETL (PL/SQL, Python, Spark, Airflow) para consolidar dados e garantir o monitoramento efetivo de KPIs.
-          </span>
-          <span class="project-desc" data-lang="en">
-            Designed the commercial database structure and implemented ETL processes (PL/SQL, Python, Spark, Airflow) to consolidate data and ensure effective KPI monitoring.
-          </span>
-          <div style="margin-top: 10px;">
-            <span class="tech-tag">PL/SQL</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Spark</span>
-            <span class="tech-tag">Airflow</span>
-          </div>
-        </a>
-
-        <a href="https://github.com/filipoow/automacao-frete-jadlog" target="_blank" class="project-item">
-          <div class="project-meta" data-lang="pt">Jadlog | Automação</div>
-          <div class="project-meta" data-lang="en">Jadlog | Automation</div>
-          <span class="project-title" data-lang="pt">Automação de Tabela de Preços de Frete (VTEX, Intelipost)</span>
-          <span class="project-title" data-lang="en">Freight Price Table Automation (VTEX, Intelipost)</span>
-          <span class="project-desc" data-lang="pt">
-            Criação de Batch Scripts em Python (Pandas) para formatar a tabela de preços de frete para plataformas como VTEX, Intelipost e Loja Integrada, reduzindo horas de trabalho manual.
-          </span>
-          <span class="project-desc" data-lang="en">
-            Built Python Batch Scripts (Pandas) to format the freight price tables for platforms like VTEX, Intelipost, and Loja Integrada, reducing hours of manual work.
-          </span>
-          <div style="margin-top: 10px;">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Pandas</span>
-            <span class="tech-tag">Xlsxwriter</span>
-            <span class="tech-tag">Automação</span>
-          </div>
-        </a>
-
-        <a href="#" class="project-item">
-          <div class="project-meta" data-lang="pt">Jadlog | CRM & Qualidade de Dados</div>
-          <div class="project-meta" data-lang="en">Jadlog | CRM & Data Quality</div>
-          <span class="project-title" data-lang="pt">Gerenciamento de Dados e Integração Salesforce</span>
-          <span class="project-title" data-lang="en">Salesforce Data Management and Integration</span>
-          <span class="project-desc" data-lang="pt">
-            Gerenciamento e integração eficiente de dados no Salesforce utilizando SOQL, Python, Salesforce API e ViaCep API. Implementação de rotinas de limpeza e validação para manter o CRM preciso.
-          </span>
-          <span class="project-desc" data-lang="en">
-            Efficient data management and integration in Salesforce using SOQL, Python, Salesforce API, and ViaCep API. Implemented cleaning and validation routines to maintain CRM accuracy.
-          </span>
-          <div style="margin-top: 10px;">
-            <span class="tech-tag">Salesforce</span>
-            <span class="tech-tag">SOQL</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Data Quality</span>
-          </div>
-        </a>
-
-        <a href="#" class="project-item">
-          <div class="project-meta" data-lang="pt">Jadlog | BI & Análise</div>
-          <div class="project-meta" data-lang="en">Jadlog | BI & Analysis</div>
-          <span class="project-title" data-lang="pt">Insights e Dashboards Personalizados com PowerBI</span>
-          <span class="project-title" data-lang="en">Custom Insights and Dashboards with PowerBI</span>
-          <span class="project-desc" data-lang="pt">
-            Aprimoramento das Operações Comerciais no Salesforce através do desenvolvimento de KPIs, análise de pipeline e criação de insights personalizados com o uso do Power BI.
-          </span>
-          <span class="project-desc" data-lang="en">
-            Enhanced Commercial Operations within Salesforce by developing KPIs, pipeline analysis, and creating custom insights using Power BI.
-          </span>
-          <div style="margin-top: 10px;">
-            <span class="tech-tag">Power BI</span>
-            <span class="tech-tag">DAX</span>
-            <span class="tech-tag">Salesforce</span>
-            <span class="tech-tag">KPIs</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section-output">
-      <div class="terminal-header">~/filipe/cv $ <span class="typing-header">ls -l *.pdf</span></div>
-      <h2 data-lang="pt">Download do Currículo</h2>
-      <h2 data-lang="en">Resume Download</h2>
-
-      <p data-lang="pt">
-        Baixe a versão completa do meu currículo em PDF no idioma de sua preferência.
-      </p>
-      <p data-lang="en">
-        Download the complete version of my resume in PDF format in your preferred language.
-      </p>
-    
-      <div class="download-actions">
-        <a href="docs/curriculo_pt.pdf" download class="btn-terminal btn-main" data-lang="pt">
-          Baixar CV
-        </a>
-
-        <a href="docs/curriculo_en.pdf" download class="btn-terminal btn-main" data-lang="en">
-          Download CV
-        </a>
-      </div>
-    </section>
-
-    <section class="cta-section">
-      <h2 data-lang="pt">E então, vamos construir algo incrível?</h2>
-      <h2 data-lang="en">So, shall we build something amazing?</h2>
-      
-      <p data-lang="pt">
-        Estou sempre em busca de novos desafios e ambientes onde minha paixão por dados, programação e inovação possa gerar impacto real. Se você busca um resolvedor de problemas com visão estratégica, meu terminal está aberto.
-      </p>
-      <p data-lang="en">
-        I am always looking for new challenges and environments where my passion for data, programming, and innovation can generate real impact. If you are looking for a problem-solver with a strategic vision, my terminal is open.
-      </p>
-
-      <div class="cta-actions">
-          <a href="https://calendly.com/emaildofilipe-m/30min" target="_blank" class="btn-terminal btn-main" data-lang="pt">
-              Agendar Reunião >_
-          </a>
-          <a href="https://calendly.com/emaildofilipe-m/30min" target="_blank" class="btn-terminal btn-main" data-lang="en">
-              Book a Meeting >_
-          </a>
-
-          <a href="mailto:fmartins.nascimento@outlook.com" class="btn-secondary" data-lang="pt">
-              Enviar um E-mail
-          </a>
-          <a href="mailto:fmartins.nascimento@outlook.com" class="btn-secondary" data-lang="en">
-              Send an Email
-          </a>
-      </div>
-
-      <div class="social-links">
-        <a href="https://linkedin.com/in/filipoow" target="_blank">linkedin.com/in/filipoow</a>
-        <a href="https://github.com/filipoow" target="_blank">github.com/filipoow</a>
-      </div>
-    </section>
-
-    <div>
-      <br><br>
-      <a href="changelog.html" target="_blank" class="footer-link-changelog" data-lang="pt">Ver Log de Versão</a>
-      <a href="changelog.html" target="_blank" class="footer-link-changelog" data-lang="en">View Changelog</a>
-    </div>
-
-    <footer>
-      <p data-lang="pt">filipe.martins-dev // All systems operational. // &copy; 2025</p>
-      <p data-lang="en">filipe.martins-dev // All systems operational. // &copy; 2025</p>
-    </footer>
-
-  </div>
-
-  <script src="script.js"></script>
+<script src="src/content.js"></script>
+<script type="text/babel" data-presets="react" src="src/system.jsx"></script>
+<script type="text/babel" data-presets="react">
+  function App() {
+    return <window.SystemSite />;
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
 </body>
 </html>
