@@ -94,6 +94,7 @@ function V3GlobalStyles() {
 
       /* === Responsive: mobile (720px and below) === */
       @media (max-width: 720px) {
+        .v3-lang-switcher { display: none !important; }
         .v3-page { padding: 0 20px !important; }
         .v3-nav-center { display: none !important; }
         .v3-nav-grid { grid-template-columns: 1fr auto !important; gap: 12px !important; padding-left: 20px !important; padding-right: 20px !important; }
@@ -276,7 +277,7 @@ function V3Nav({ lang, setLang, t, current = "home" }) {
       background: `${BG}d8`,
       backdropFilter: "blur(12px)",
     }}>
-      <div style={{
+      <div className="v3-nav-grid" style={{
         maxWidth: MAX_W,
         margin: "0 auto",
         display: "grid",
@@ -323,7 +324,7 @@ function V3Nav({ lang, setLang, t, current = "home" }) {
 
         {/* CTA outlined + lang */}
         <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, alignItems: "center" }}>
-          <div style={{
+          <div className="v3-lang-switcher" style={{
             display: "flex",
             position: "relative",
             border: `1px solid ${BORDER}`,
@@ -626,7 +627,7 @@ function V3About({ t }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {t.about.stats.map((s, i) =>
           <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <div style={{
+              <div className="v3-about-stats" style={{
               fontSize: 72, fontWeight: 400,
               letterSpacing: "-0.045em",
               lineHeight: 1,
