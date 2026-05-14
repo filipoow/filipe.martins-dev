@@ -41,10 +41,10 @@ function Pill({ children, dark = false }) {
 /* ---------- NAV ---------- */
 function DNav({ lang, setLang, t, current = "home" }) {
   const items = [
-    { key: "filipe", label: t.nav.work, href: current === "filka" ? "site.html" : "#top" },
+    { key: "filipe", label: t.nav.work, href: current === "filka" ? "./" : "#top" },
     { key: "filka", label: t.nav.filka, href: "filka.html" },
-    { key: "about", label: t.nav.about, href: current === "filka" ? "site.html#about" : "#about" },
-    { key: "contact", label: t.nav.contact, href: current === "filka" ? "site.html#contact" : "#contact" },
+    { key: "about", label: t.nav.about, href: current === "filka" ? "./#about" : "#about" },
+    { key: "contact", label: t.nav.contact, href: current === "filka" ? "./#contact" : "#contact" },
   ];
   return (
     <nav style={{
@@ -57,7 +57,7 @@ function DNav({ lang, setLang, t, current = "home" }) {
       backdropFilter: "blur(12px)",
       borderBottom: `1px solid ${SUBTLE_BORDER}`,
     }}>
-      <a href="site.html" style={{
+      <a href="./" style={{
         display: "flex", alignItems: "center", gap: 10,
         textDecoration: "none", color: INK,
       }}>
