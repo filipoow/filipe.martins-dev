@@ -3,8 +3,28 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Filipe Martins — Sr. Analytics Engineer</title>
-<meta name="description" content="Analytics Engineer Sênior. Pipelines em Databricks, modelos de ML em produção e agentes de IA generativa. Cofundador da Filka Studio." />
+<title>Filka Studio — Programação + Design Digital</title>
+<meta name="description" content="Filka Studio: estúdio cofundado por Filipe Martins em 2022. Integramos programação e design digital — Salesforce, automação, sites e identidade visual." />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/favicon.svg" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Filka Studio" />
+<meta property="og:title" content="Filka Studio — Programação + Design Digital" />
+<meta property="og:description" content="Estúdio cofundado em 2022. Salesforce sob medida, automações em Python, sites e identidade visual." />
+<meta property="og:image" content="assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="pt_BR" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Filka Studio — Programação + Design Digital" />
+<meta name="twitter:description" content="Salesforce sob medida, automações em Python, sites e identidade visual. Estúdio cofundado em 2022." />
+<meta name="twitter:image" content="assets/og-image.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -12,7 +32,7 @@
   html, body { margin: 0; padding: 0; }
   body {
     font-family: 'Inter Tight', 'Helvetica Neue', sans-serif;
-    background: #F4F4F0;
+    background: #FFFFFF;
     color: #0B0F0E;
     -webkit-font-smoothing: antialiased;
   }
@@ -22,8 +42,7 @@
     50%, 100% { opacity: 0; }
   }
   .cursor-blink { animation: blink 1s steps(1) infinite; }
-  a { transition: opacity 0.2s, color 0.2s; }
-  a:hover { opacity: 0.75; }
+  a { transition: opacity 0.2s, color 0.2s, transform 0.2s; }
   button { transition: opacity 0.2s; }
   button:hover { opacity: 0.85; }
   html { scroll-behavior: smooth; }
@@ -36,10 +55,11 @@
 <div id="root"></div>
 
 <script src="src/content.js"></script>
-<script type="text/babel" data-presets="react" src="src/system.jsx"></script>
+<script type="text/babel" src="src/site_v3.jsx"></script>
+<script type="text/babel" src="src/filka.jsx"></script>
 <script type="text/babel" data-presets="react">
   function App() {
-    return <window.SystemSite />;
+    return <window.FilkaSite />;
   }
   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
