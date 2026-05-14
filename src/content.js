@@ -295,7 +295,7 @@ window.SITE_CONTENT = {
 };
 
 window.SITE_LINKS = {
-  calendly: "https://calendly.com/emaildofilipe-m/30min",
+  calendly: "https://calendar.app.google/ftb9WdVH4RML2uzf7",
   email: "mailto:fmartins.nascimento@outlook.com",
   linkedin: "https://linkedin.com/in/filipoow",
   github: "https://github.com/filipoow",
