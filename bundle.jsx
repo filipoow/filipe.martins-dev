@@ -1,0 +1,590 @@
+/* Filipe Martins — bundled components. Source: src/v4/*.jsx */
+
+const { useEffect: useE4, useRef: useR4 } = React;
+
+/* --- lanyard badge that swings with the pointer --- */
+function Badge({ b, side }) {
+  const rig = useR4(null);
+  const card = useR4(null);
+
+  useE4(() => {
+    let mx = 0, my = 0, a = 0, v = 0, ty = 0, tx = 0, raf, t0 = performance.now();
+    const soft = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const onMove = e => {
+      mx = (e.clientX / window.innerWidth) * 2 - 1;
+      my = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+    const tick = now => {
+      const idle = Math.sin((now - t0) / 1500) * 1.15;
+      const target = mx * 13 + idle;
+      v += (target - a) * 0.014;
+      v *= 0.915;
+      a += v;
+      ty += (mx * 15 - ty) * 0.075;
+      tx += (-my * 9 - tx) * 0.075;
+      if (rig.current) rig.current.style.transform = `rotate(${a.toFixed(3)}deg)`;
+      if (card.current) card.current.style.transform = `perspective(900px) rotateY(${ty.toFixed(3)}deg) rotateX(${tx.toFixed(3)}deg)`;
+      raf = requestAnimationFrame(tick);
+    };
+    if (!soft) {
+      window.addEventListener("pointermove", onMove);
+      raf = requestAnimationFrame(tick);
+    }
+    return () => { window.removeEventListener("pointermove", onMove); if (raf) cancelAnimationFrame(raf); };
+  }, []);
+
+  const strapText = Array(9).fill(b.name.toUpperCase()).join("  ·  ");
+
+  return (
+    <div className="rig-wrap">
+      <span className="side-tag">{side}</span>
+      <div className="rig" ref={rig}>
+        <div className="strap"><span>{strapText}</span></div>
+        <div className="clip"></div>
+        <div className="ring"></div>
+        <div className="card3d" ref={card}>
+          <div className="badge">
+            <span className="punch"></span>
+            <div className="badge-photo">
+              <img src="assets/filipe.jpg" alt={b.name} />
+            </div>
+            <div className="badge-foot">
+              <p className="badge-name">{b.name}</p>
+              <p className="badge-role">{b.role}</p>
+              <div className="badge-pills">
+                {b.pills.map(p => <span key={p}>{p}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+window.Badge = Badge;
+
+
+const { useState: useS3, useEffect: useE3, useRef: useR3 } = React;
+
+const ICON_CDN = "https://cdn.jsdelivr.net/npm/simple-icons/icons/";
+
+/* --- brand mark, falls back to the name if the icon 404s --- */
+function Mark({ x, size }) {
+  const [err, setErr] = useS3(false);
+  if (err) return <span className="mark-fb">{x.n}</span>;
+  return (
+    <img
+      className="mark mark-w"
+      src={ICON_CDN + x.s + ".svg"}
+      alt={x.n} title={x.n}
+      style={{ width: size, height: size }}
+      onError={() => setErr(true)}
+      loading="lazy"
+    />
+  );
+}
+
+/* --- tech field: clustered at center, spreads open on scroll --- */
+const FIELD = [
+  [16, 13, -7], [9, 37, 6], [21, 62, -5], [13, 84, 7],
+  [34, 24, 5], [30, 74, -6], [46, 8, -4], [44, 90, 6],
+  [58, 30, 7], [62, 68, -7], [72, 16, 5], [76, 52, -5],
+  [70, 86, 6], [86, 38, -6],
+];
+function Skills({ t }) {
+  const wrap = useR3(null);
+  const [k, setK] = useS3(1);
+  const [box, setBox] = useS3({ w: 1100, h: 520 });
+
+  useE3(() => {
+    const measure = () => {
+      const el = wrap.current;
+      if (el) setBox({ w: el.clientWidth, h: el.clientHeight });
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  useE3(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setK(0); return; }
+    const on = () => {
+      const el = wrap.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const p = (window.innerHeight - r.top) / (window.innerHeight * 0.7);
+      const clamped = Math.min(1, Math.max(0, p));
+      setK(0.25 * (1 - clamped));
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, [box.h]);
+
+  const kk = Math.min(0.25, Math.max(0, k));
+  return (
+    <section className="sec skills" data-rv>
+      <div className="field" ref={wrap} style={{ "--k": kk }} aria-hidden="true">
+        {window.V3.tech.map((x, i) => {
+          const [top, left, rot] = FIELD[i % FIELD.length];
+          const ang = Math.atan2(top - 50, left - 50);
+          const rx = 50 + Math.cos(ang) * 30;
+          const ry = 50 + Math.sin(ang) * 40;
+          return (
+            <span key={x.n} className="tile" style={{
+              top: top + "%", left: left + "%",
+              "--rot": rot + "deg",
+              "--dx": ((rx - left) / 100) * box.w + "px",
+              "--dy": ((ry - top) / 100) * box.h + "px",
+            }}><Mark x={x} size={30} /></span>
+          );
+        })}
+      </div>
+      <h2 className="skills-h">
+        {t.skills.title}<br /><span className="dim">{t.skills.title2}</span>
+      </h2>
+    </section>
+  );
+}
+
+/* --- one stat at a time, cycling + two marquee rows --- */
+function Stats({ t }) {
+  const items = t.stats.items;
+  const [i, setI] = useS3(0);
+  const [vis, setVis] = useS3(true);
+  useE3(() => {
+    let swap;
+    const id = setInterval(() => {
+      setVis(false);
+      swap = setTimeout(() => { setI(v => (v + 1) % items.length); setVis(true); }, 320);
+    }, 3400);
+    return () => { clearInterval(id); clearTimeout(swap); };
+  }, [items.length]);
+  const s = items[i % items.length];
+  const row = [...window.V3.tech, ...window.V3.tech];
+  return (
+    <section className="sec stats-sec" data-rv>
+      <h2 className="stats-h">{t.stats.heading}</h2>
+      <div className={vis ? "stat-one on" : "stat-one"}>
+        <span className="stat-ico">
+          <Mark x={s} size={46} />
+        </span>
+        <p className="stat-line">
+          <span className="acc">{s.v}</span> {s.l}
+        </p>
+      </div>
+      <div className="dots stat-dots">
+        {items.map((_, n) => (
+          <button key={n} className={n === i ? "dot on" : "dot"}
+            onClick={() => { setI(n); setVis(true); }} aria-label={"número " + (n + 1)}></button>
+        ))}
+      </div>
+      <div className="marq">
+        <div className="marq-in">
+          {row.map((x, n) => <span key={n} className="marq-t"><Mark x={x} size={26} /></span>)}
+        </div>
+      </div>
+      <div className="marq">
+        <div className="marq-in rev">
+          {row.map((x, n) => <span key={n} className="marq-t"><Mark x={x} size={26} /></span>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --- experience --- */
+function Experience({ t }) {
+  return (
+    <section className="sec exp-sec" id="exp">
+      <h2 className="sec-h exp-h" data-rv>
+        <span className="acc">{t.exp.accent}</span> {t.exp.rest}
+      </h2>
+      <div className="exp-grid">
+        <div className="exp-aside">
+          <div className="exp-span">
+            <span>{t.h4.axis[0]}</span>
+            <span className="exp-line"></span>
+            <span>{t.h4.axis[1]}</span>
+          </div>
+        </div>
+        <div className="exp-list">
+          {t.exp.items.map((e, i) => (
+            <article className="exp-row" key={i} data-rv>
+              <h3 className="exp-role">
+                {e.role} <span className="dim">@</span> <span className="acc">{e.co}</span>
+              </h3>
+              <p className="exp-period">{e.period}</p>
+              <ul className="exp-b">
+                {e.bullets.map((b, k) => <li key={k}>{window.richText(b)}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --- testimonials --- */
+function Quotes({ t }) {
+  const [i, setI] = useS3(0);
+  const items = t.quotes.items;
+  const q = items[i];
+  return (
+    <section className="sec quote-sec" data-rv>
+      <h2 className="sec-h">{t.quotes.heading}</h2>
+      <blockquote className="quote">
+        <span className="quote-mark">&ldquo;</span>
+        <p className="quote-t">{q.q}</p>
+        <footer className="quote-f">
+          <span className="ava">{q.a.split(" ").map(n => n[0]).slice(0, 2).join("")}</span>
+          <span>
+            <span className="quote-a">{q.a}</span>
+            <span className="quote-r">{q.r}</span>
+          </span>
+        </footer>
+      </blockquote>
+      <div className="dots">
+        {items.map((_, k) => (
+          <button key={k} className={k === i ? "dot on" : "dot"} onClick={() => setI(k)} aria-label={"depoimento " + (k + 1)}></button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { Skills, Stats, Experience, Quotes, Mark });
+
+
+const { useState: useSW, useEffect: useEW, useRef: useRW } = React;
+
+/* --- interactive terminal --- */
+function Terminal({ t, lang }) {
+  const T = window.V3.terminal[lang];
+  const [lines, setLines] = useSW(() => T.boot.map(l => ({ k: "o", v: l })));
+  const [val, setVal] = useSW("");
+  const bodyRef = useRW(null);
+  const inRef = useRW(null);
+
+  useEW(() => { setLines(T.boot.map(l => ({ k: "o", v: l }))); }, [lang]);
+  useEW(() => {
+    const b = bodyRef.current;
+    if (b) b.scrollTop = b.scrollHeight;
+  }, [lines]);
+
+  function run(raw) {
+    const cmd = raw.trim().toLowerCase();
+    const out = [{ k: "i", v: raw }];
+    if (!cmd) { setLines(l => [...l, ...out]); return; }
+    if (cmd === "clear") { setLines([]); return; }
+    let res;
+    if (cmd === "help") res = T.help;
+    else if (cmd === "whoami") res = T.whoami;
+    else if (cmd === "filka") res = T.filka;
+    else if (cmd === "contact") res = T.contact;
+    else if (cmd === "stack") res = ["", ...chunk(window.V3.tech.map(x => x.n), 4).map(r => "  " + r.join("   ")), ""];
+    else if (cmd === "cases") res = ["", ...t.work.cases.map(c => `  ${c.metric.padEnd(7)} ${c.name}  [${c.co}, ${c.yr}]`), ""];
+    else if (cmd === "exp") res = ["", ...t.exp.items.map(e => `  ${e.period.padEnd(16)} ${e.role} @ ${e.co}`), ""];
+    else res = [T.notFound(cmd)];
+    setLines(l => [...l, ...out, ...res.map(v => ({ k: "o", v }))]);
+  }
+
+  function chunk(a, n) {
+    const r = [];
+    for (let i = 0; i < a.length; i += n) r.push(a.slice(i, i + n));
+    return r;
+  }
+
+  return (
+    <div className="term" onClick={() => inRef.current && inRef.current.focus()}>
+      <div className="term-bar">
+        <span className="tl tl-r"></span><span className="tl tl-y"></span><span className="tl tl-g"></span>
+        <span className="term-title">filipe@portfolio:~</span>
+      </div>
+      <div className="term-body" ref={bodyRef}>
+        {lines.map((l, i) => (
+          <div key={i} className={l.k === "i" ? "term-in" : "term-out"}>
+            {l.k === "i" && <span className="term-ps">filipe@portfolio:~$</span>}
+            <span>{l.v}</span>
+          </div>
+        ))}
+        <form className="term-form" onSubmit={e => { e.preventDefault(); run(val); setVal(""); }}>
+          <span className="term-ps">filipe@portfolio:~$</span>
+          <input
+            ref={inRef} value={val} onChange={e => setVal(e.target.value)}
+            spellCheck="false" autoComplete="off" aria-label="terminal"
+          />
+        </form>
+      </div>
+    </div>
+  );
+}
+
+/* --- case cards --- */
+function CaseCard({ c, i }) {
+  return (
+    <article className="card">
+      <div className="card-shot">
+        <image-slot id={"case-" + i} shape="rounded" radius="14" placeholder={"Print de " + c.name}></image-slot>
+      </div>
+      <div className="card-meta">
+        <span>{c.co}</span><span className="dim">·</span><span>{c.yr}</span>
+      </div>
+      <h3 className="card-t">{c.name}</h3>
+      <p className="card-d">{c.desc}</p>
+      <div className="card-foot">
+        <div>
+          <div className="card-m">{c.metric}</div>
+          <div className="card-ml">{c.label}</div>
+        </div>
+        <div className="card-tags">
+          {c.tags.map(x => <span key={x}>{x}</span>)}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* --- filka panel --- */
+function FilkaPanel({ t }) {
+  const f = t.work.filka;
+  return (
+    <div className="filka">
+      <div className="filka-l">
+        <span className="filka-badge">Filka</span>
+        <p className="filka-kick">{f.kicker}</p>
+        <h3 className="filka-t">{f.title}</h3>
+        <p className="filka-b">{f.body}</p>
+        <a className="btn btn-dark" href={window.V3.links.filka} target="_blank" rel="noopener">
+          {f.cta}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </a>
+      </div>
+      <ul className="filka-list">
+        {f.items.map(x => <li key={x}>{x}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+/* --- work section with tabs --- */
+function Work({ t, lang }) {
+  const [tab, setTab] = useSW(0);
+  const [ind, setInd] = useSW({ opacity: 0 });
+  const btns = useRW([]);
+  const wrapRef = useRW(null);
+
+  useEW(() => {
+    const place = () => {
+      const b = btns.current[tab];
+      if (!b) return;
+      setInd({ opacity: 1, width: b.offsetWidth + "px", transform: `translateX(${b.offsetLeft}px)` });
+    };
+    place();
+    const id = setTimeout(place, 120);
+    window.addEventListener("resize", place);
+    return () => { clearTimeout(id); window.removeEventListener("resize", place); };
+  }, [tab, lang]);
+  useEW(() => {
+    const onHash = () => {
+      if (location.hash !== "#filka") return;
+      setTab(1);
+      requestAnimationFrame(() => {
+        const el = document.querySelector(".work-sec");
+        if (el) window.scrollTo({ top: el.offsetTop - 70, behavior: "smooth" });
+      });
+    };
+    onHash();
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+  return (
+    <section className="sec work-sec" id="work">
+      <span id="filka" className="anchor"></span>
+      <h2 className="sec-h" data-rv>{t.work.heading}</h2>
+      <div className="tabs" ref={wrapRef}>
+        <span className="tab-ind" style={ind}></span>
+        {t.work.tabs.map((x, i) => (
+          <button key={x} ref={el => (btns.current[i] = el)}
+            className={i === tab ? "tab on" : "tab"} onClick={() => setTab(i)}>
+            {x}
+            {i === 2 && <span className="tab-new">NEW</span>}
+          </button>
+        ))}
+      </div>
+      {tab === 0 && (
+        <React.Fragment>
+          <p className="tab-hint">{t.work.hint}</p>
+          <div className="cards pop">
+            {t.work.cases.map((c, i) => <CaseCard key={i} c={c} i={i} />)}
+          </div>
+        </React.Fragment>
+      )}
+      {tab === 1 && <div className="pop"><FilkaPanel t={t} /></div>}
+      {tab === 2 && (
+        <React.Fragment>
+          <p className="tab-hint">{t.work.terminalHint}</p>
+          <div className="pop"><Terminal t={t} lang={lang} /></div>
+        </React.Fragment>
+      )}
+    </section>
+  );
+}
+
+Object.assign(window, { Work, Terminal });
+
+
+const { useState: useS, useEffect: useE, useRef: useR } = React;
+
+function richText(s) {
+  return s.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**")
+      ? <strong key={i}>{part.slice(2, -2)}</strong>
+      : <React.Fragment key={i}>{part}</React.Fragment>
+  );
+}
+
+function Progress() {
+  const [p, setP] = useS(0);
+  useE(() => {
+    const on = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setP(h > 0 ? (window.scrollY / h) * 100 : 0);
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    window.addEventListener("resize", on);
+    return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
+  }, []);
+  return <div className="prog" style={{ width: p + "%" }}></div>;
+}
+
+function Nav({ t, lang, setLang }) {
+  const [hover, setHover] = useS(false);
+  const [pin, setPin] = useS(false);
+  const open = hover || pin;
+  return (
+    <nav className="nav-wrap">
+      <div
+        className={"nav" + (open ? " nav-open" : "")}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <button className="nav-toggle" onClick={() => setPin(v => !v)} aria-label="menu">
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" className={open ? "bars x" : "bars"}>
+            <path className="b1" d="M1 1.5h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+            <path className="b2" d="M1 10.5h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+          </svg>
+        </button>
+        <span className="nav-brand">Filipe Martins</span>
+        <div className="nav-links" aria-hidden={!open}>
+          <a href="#work" onClick={() => setPin(false)}>{t.nav.work}</a>
+          <a href="#exp" onClick={() => setPin(false)}>{t.nav.exp}</a>
+          <a href="#filka" onClick={() => setPin(false)}>{t.nav.filka}</a>
+          <a href="#contact" onClick={() => setPin(false)}>{t.nav.contact}</a>
+        </div>
+      </div>
+      <button className="lang" onClick={() => setLang(lang === "pt" ? "en" : "pt")}>
+        {lang === "pt" ? "PT" : "EN"}
+      </button>
+    </nav>
+  );
+}
+
+function Hero({ t }) {
+  const h = t.h4;
+  return (
+    <header className="hero">
+      <div className="hero-grid">
+        <div className="hero-l">
+          <span className="loc"><i></i>{h.loc}</span>
+          <h1 className="hero-title">
+            {h.lines.map((l, i) => <span key={i}>{l}</span>)}
+          </h1>
+          <p className="strip">
+            {h.strip.map((s, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <span className="bar">|</span>}
+                <span>{s}</span>
+              </React.Fragment>
+            ))}
+          </p>
+          <div className="hero-ctas">
+            <a className="pill" href="#work">{h.cta1}</a>
+            <a className="pill pill-solid" href={window.V3.links.calendly} target="_blank" rel="noopener">{h.cta2}</a>
+          </div>
+        </div>
+        <div className="hero-r">
+          <window.Badge b={h.badge} side={h.side} />
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function Contact({ t }) {
+  return (
+    <section className="sec cta-sec" id="contact" data-rv>
+      <h2 className="cta-h">{t.cta.heading}</h2>
+      <p className="cta-sub">{t.cta.sub}</p>
+      <div className="hero-ctas cta-btns">
+        <a className="pill pill-solid" href={window.V3.links.calendly} target="_blank" rel="noopener">{t.cta.b1}</a>
+        <a className="pill" href={window.V3.links.email}>{t.cta.b2}</a>
+      </div>
+    </section>
+  );
+}
+
+function Footer({ t }) {
+  return (
+    <footer className="foot">
+      <p className="foot-tag">{t.footer.tag}</p>
+      <div className="foot-links">
+        <a href={window.V3.links.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a href={window.V3.links.github} target="_blank" rel="noopener">GitHub</a>
+        <a href={window.V3.links.email}>Email</a>
+        <a href={window.V3.links.filka} target="_blank" rel="noopener">Filka</a>
+        <a href="llms.txt" target="_blank" rel="noopener">llms.txt</a>
+      </div>
+      <p className="foot-copy">© 2026</p>
+    </footer>
+  );
+}
+
+function App() {
+  const [lang, setLang] = useS(() => localStorage.getItem("fm_lang") || "pt");
+  useE(() => { localStorage.setItem("fm_lang", lang); }, [lang]);
+
+  useE(() => {
+    const show = () => document.querySelectorAll("[data-rv]").forEach(e => e.classList.add("in"));
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      show(); return;
+    }
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }), { rootMargin: "0px 0px -10% 0px", threshold: 0.06 });
+    document.querySelectorAll("[data-rv]").forEach(e => io.observe(e));
+    const safety = setTimeout(show, 2600);
+    return () => { io.disconnect(); clearTimeout(safety); };
+  }, [lang]);
+
+  const t = window.V3[lang];
+  return (
+    <React.Fragment>
+      <Progress />
+      <Nav t={t} lang={lang} setLang={setLang} />
+      <Hero t={t} />
+      <window.Skills t={t} />
+      <window.Work t={t} lang={lang} />
+      <window.Stats t={t} />
+      <window.Experience t={t} />
+      <window.Quotes t={t} />
+      <Contact t={t} />
+      <Footer t={t} />
+    </React.Fragment>
+  );
+}
+
+Object.assign(window, { richText, App });

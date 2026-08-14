@@ -1,0 +1,83 @@
+# Filipe Martins
+
+> Senior Analytics Engineer at Omie and co-founder of Filka Studio. Based in São Paulo, Brazil. Five years building data platforms, machine learning models and generative AI systems in production.
+
+Website: https://filipoow.github.io/filipe.martins-dev/
+Email: fmartins.nascimento@outlook.com
+LinkedIn: https://linkedin.com/in/filipoow
+GitHub: https://github.com/filipoow
+Studio: https://filkastudio.com.br
+Booking: https://calendly.com/emaildofilipe-m/30min
+Languages: Portuguese (native), English (professional)
+Last updated: August 2026
+
+## Summary
+
+Filipe Martins is a Senior Analytics Engineer at Omie, a Brazilian SaaS company, where he builds machine learning models and generative AI agents on Databricks. He started in 2021 automating spreadsheets in Jadlog's back office, grew into the data team as a Data Analyst, and moved into analytics engineering at Omie in 2024. In parallel he co-founded Filka Studio in 2022, a São Paulo studio that combines software development and digital design.
+
+He works across the full data path: ingestion, modeling, orchestration, machine learning, and the applied AI layer on top. His work is measured in hours returned to teams and manual processes removed, not in tools adopted.
+
+## Availability
+
+Open to new projects and proposals. Takes full-time roles, contract work through Filka Studio, and short freelance engagements. Works remotely and comfortable with asynchronous English communication.
+
+## What he does
+
+- Modern data pipelines: Databricks, AWS, dbt, Airflow, Spark. Ingestion through consumption, with observability and CI/CD.
+- Applied generative AI: internal chatbots, RAG agents over company knowledge bases, LLM-driven workflow automation.
+- Business machine learning: classification, regression and optimization for allocation, churn, scoring and demand forecasting.
+- Salesforce and automation via Filka Studio: Apex, Flows, LWC, API integrations, CRM data quality.
+
+## Selected work
+
+### Smart client-to-franchise allocation — Omie, 2025
+100% of routing automated. The team previously matched clients to franchises by hand. Filipe built a model that scores each client and crosses that score with every franchise profile to produce the ideal match without human intervention. Stack: Python, Scikit-learn, Databricks.
+
+### Internal LLM chatbot — Omie, 2025
+Around 400 hours per month recovered from knowledge-base searching. A RAG agent that answers questions about policies, processes and technical documentation in natural language, which also shortened onboarding for new hires. Stack: LLMs, RAG, OpenAI, Python.
+
+### Commercial KPI ETL — Jadlog, 2023
+Twelve executive dashboards consolidated onto a single source of truth. Designed the commercial data structure in Oracle and the Spark and Airflow pipelines feeding leadership's Power BI. Stack: PL/SQL, Spark, Airflow, Power BI.
+
+### Freight table automation — Jadlog, 2023
+Roughly 60 hours of manual work per week eliminated. Python scripts that format freight tables for VTEX, Intelipost and Loja Integrada, ending a recurring rework cycle. Stack: Python, Pandas.
+
+### Tailored Salesforce — Filka Studio, 2024
+Two active clients on customized Sales Cloud. Implementations, Apex and Flows automations, API integrations and executive dashboards for commercial operations. Stack: Apex, Flows, LWC, APIs.
+
+## Experience
+
+### Senior Analytics Engineer — Omie
+2026 to present. Applied AI and data projects on Databricks. Machine learning models for allocation and scoring. LLM and RAG agents over the internal knowledge base.
+
+### Data Analyst (mid-level) — Omie
+2024 to 2026. Product analytics in a SaaS environment. Began exploring machine learning and generative AI inside the company.
+
+### Co-founder — Filka Studio
+2022 to present. A code and digital design studio founded in São Paulo. Salesforce solutions, automations and business intelligence. End-to-end client work from discovery through handover.
+
+### Data Analyst, junior to mid-level — Jadlog
+2022 to 2024. Built the ETLs and the commercial KPI foundation. Spark and Airflow pipelines feeding Power BI. Modeling in Oracle and PL/SQL for the commercial team.
+
+### Apprentice, back office — Jadlog
+2021 to 2022. Started automating spreadsheets independently with Python. Where he found out data was the work he wanted.
+
+## Stack
+
+Databricks, AWS, Python, Apache Airflow, Apache Spark, dbt, Snowflake, Power BI, PostgreSQL, Oracle, PL/SQL, OpenAI API, LangChain, RAG, Scikit-learn, Pandas, Salesforce (Sales Cloud, Apex, Flows, LWC), Git.
+
+## Filka Studio
+
+Founded 2022, São Paulo. Co-founded by Filipe to bring together two fields that usually stay apart: software development and digital design. Services: tailored Salesforce, Python automations, websites and landing pages, brand and visual identity, business intelligence, consulting and discovery. Two active Salesforce clients. Team of 2 to 10. Site: https://filkastudio.com.br
+
+Working method: discovery first, then a proposal with three paths (minimum viable, recommended, complete) so the client picks scope, timeline and investment. Short sprints with continuous delivery. Documentation, training and post-delivery support at handover.
+
+## References
+
+Michele Lopes, Commercial Coordinator and Filipe's manager at Jadlog: describes him as an outstanding professional with unmatched commitment, noting every assignment was delivered on time with rich detail and refinement.
+
+Lorena Santos Andrade, Product Owner and teammate at Jadlog: says no obstacle is too big for him in development, that he consistently brings innovation and improvements with a surprising eye for process, frequently delivers more than expected, and was her right hand as developer and tech lead.
+
+## How to reach him
+
+Free 30-minute diagnostic call. He leaves the call with the problem understood and sends a proposal within three days. Book at https://calendly.com/emaildofilipe-m/30min or email fmartins.nascimento@outlook.com

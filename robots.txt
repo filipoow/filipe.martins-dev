@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://filipoow.github.io/filipe.martins-dev/sitemap.xml
