@@ -1,27 +1,32 @@
 /* Filipe Martins — bundled components. Source: src/v4/*.jsx */
 
-const { useEffect: useE4, useRef: useR4 } = React;
+const { useEffect: useE4, useRef: useR4, useState: useS4 } = React;
 
-/* --- lanyard badge that swings with the pointer --- */
-function Badge({ b, side }) {
+const clamp1 = n => Math.max(-1, Math.min(1, n));
+
+/* --- lanyard badge: swings with the pointer, or with device tilt on mobile --- */
+function Badge({ b, side, tiltHint }) {
   const rig = useR4(null);
   const card = useR4(null);
+  const inp = useR4({ x: 0, y: 0 });
+  const [needsAsk, setAsk] = useS4(false);
 
   useE4(() => {
-    let mx = 0, my = 0, a = 0, v = 0, ty = 0, tx = 0, raf, t0 = performance.now();
+    let a = 0, v = 0, ty = 0, tx = 0, raf, t0 = performance.now();
     const soft = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const onMove = e => {
-      mx = (e.clientX / window.innerWidth) * 2 - 1;
-      my = (e.clientY / window.innerHeight) * 2 - 1;
+      inp.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      inp.current.y = (e.clientY / window.innerHeight) * 2 - 1;
     };
     const tick = now => {
+      const { x, y } = inp.current;
       const idle = Math.sin((now - t0) / 1500) * 1.15;
-      const target = mx * 13 + idle;
+      const target = x * 13 + idle;
       v += (target - a) * 0.014;
       v *= 0.915;
       a += v;
-      ty += (mx * 15 - ty) * 0.075;
-      tx += (-my * 9 - tx) * 0.075;
+      ty += (x * 15 - ty) * 0.075;
+      tx += (-y * 9 - tx) * 0.075;
       if (rig.current) rig.current.style.transform = `rotate(${a.toFixed(3)}deg)`;
       if (card.current) card.current.style.transform = `perspective(900px) rotateY(${ty.toFixed(3)}deg) rotateX(${tx.toFixed(3)}deg)`;
       raf = requestAnimationFrame(tick);
@@ -31,6 +36,39 @@ function Badge({ b, side }) {
       raf = requestAnimationFrame(tick);
     }
     return () => { window.removeEventListener("pointermove", onMove); if (raf) cancelAnimationFrame(raf); };
+  }, []);
+
+  /* device tilt — gyroscope on phones and tablets */
+  useE4(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(pointer: coarse)").matches) return;
+    if (typeof DeviceOrientationEvent === "undefined") return;
+
+    let base = null;
+    const onTilt = e => {
+      if (e.gamma == null && e.beta == null) return;
+      const rot = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
+      const land = rot === 90 || rot === -90 || rot === 270;
+      const g = e.gamma || 0, be = e.beta || 0;
+      const lr = land ? be : g;
+      const fb = land ? -g : be;
+      if (base === null) base = fb;
+      inp.current.x = clamp1((land ? -lr : lr) / 32);
+      inp.current.y = clamp1((fb - base) / 30);
+    };
+
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      setAsk(true);
+      window.__badgeTilt = async () => {
+        try {
+          const r = await DeviceOrientationEvent.requestPermission();
+          if (r === "granted") { window.addEventListener("deviceorientation", onTilt); setAsk(false); }
+        } catch (err) { setAsk(false); }
+      };
+    } else {
+      window.addEventListener("deviceorientation", onTilt);
+    }
+    return () => { window.removeEventListener("deviceorientation", onTilt); delete window.__badgeTilt; };
   }, []);
 
   const strapText = Array(9).fill(b.name.toUpperCase()).join("  ·  ");
@@ -46,7 +84,7 @@ function Badge({ b, side }) {
           <div className="badge">
             <span className="punch"></span>
             <div className="badge-photo">
-              <img src="assets/filipe.jpg" alt={b.name} />
+              <img src="assets/filipe.jpg" alt={b.name} width="240" height="240" />
             </div>
             <div className="badge-foot">
               <p className="badge-name">{b.name}</p>
@@ -58,6 +96,11 @@ function Badge({ b, side }) {
           </div>
         </div>
       </div>
+      {needsAsk && tiltHint && (
+        <button className="tilt-ask" onClick={() => window.__badgeTilt && window.__badgeTilt()}>
+          {tiltHint}
+        </button>
+      )}
     </div>
   );
 }
@@ -69,19 +112,46 @@ const { useState: useS3, useEffect: useE3, useRef: useR3 } = React;
 
 const ICON_CDN = "https://cdn.jsdelivr.net/npm/simple-icons/icons/";
 
+/* brand hexes can be near-black; lift them so they read on the dark page */
+function liftColor(hex) {
+  if (!hex || hex[0] !== "#") return "#FFFFFF";
+  const h = hex.length === 4
+    ? "#" + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3]
+    : hex;
+  let r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16);
+  const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  if (lum < 0.42) {
+    const k = Math.min(0.78, (0.42 - lum) * 1.5);
+    r = Math.round(r + (255 - r) * k);
+    g = Math.round(g + (255 - g) * k);
+    b = Math.round(b + (255 - b) * k);
+  }
+  return `rgb(${r},${g},${b})`;
+}
+
 /* --- brand mark, falls back to the name if the icon 404s --- */
 function Mark({ x, size }) {
   const [err, setErr] = useS3(false);
+  useE3(() => {
+    let live = true;
+    const probe = new Image();
+    probe.onerror = () => { if (live) setErr(true); };
+    probe.src = ICON_CDN + x.s + ".svg";
+    return () => { live = false; };
+  }, [x.s]);
   if (err) return <span className="mark-fb">{x.n}</span>;
   return (
-    <img
-      className="mark mark-w"
-      src={ICON_CDN + x.s + ".svg"}
-      alt={x.n} title={x.n}
-      style={{ width: size, height: size }}
-      onError={() => setErr(true)}
-      loading="lazy"
-    />
+    <span
+      className="mark"
+      role="img"
+      aria-label={x.n}
+      title={x.n}
+      style={{
+        width: size, height: size,
+        "--mi": `url("${ICON_CDN + x.s}.svg")`,
+        "--mc": liftColor(x.c),
+      }}
+    ></span>
   );
 }
 
@@ -197,7 +267,7 @@ function Stats({ t }) {
 /* --- experience --- */
 function Experience({ t }) {
   return (
-    <section className="sec exp-sec" id="exp">
+    <section className="sec exp-sec" id="exp" data-rvi>
       <h2 className="sec-h exp-h" data-rv>
         <span className="acc">{t.exp.accent}</span> {t.exp.rest}
       </h2>
@@ -211,7 +281,7 @@ function Experience({ t }) {
         </div>
         <div className="exp-list">
           {t.exp.items.map((e, i) => (
-            <article className="exp-row" key={i} data-rv>
+            <article className="exp-row" key={i} data-rvi>
               <h3 className="exp-role">
                 {e.role} <span className="dim">@</span> <span className="acc">{e.co}</span>
               </h3>
@@ -239,11 +309,31 @@ function Quotes({ t }) {
         <span className="quote-mark">&ldquo;</span>
         <p className="quote-t">{q.q}</p>
         <footer className="quote-f">
-          <span className="ava">{q.a.split(" ").map(n => n[0]).slice(0, 2).join("")}</span>
-          <span>
-            <span className="quote-a">{q.a}</span>
-            <span className="quote-r">{q.r}</span>
-          </span>
+          {q.url
+            ? <a className="quote-who" href={q.url} target="_blank" rel="noopener">
+                <span className="ava">
+                  {q.img
+                    ? <img className="ava-img" src={q.img} alt={q.a} width="42" height="42" />
+                    : <image-slot id={"quote-" + i} shape="circle" placeholder={q.a}></image-slot>}
+                  <span className="ava-in">{q.a.split(" ").map(n => n[0]).slice(0, 2).join("")}</span>
+                </span>
+                <span className="quote-id">
+                  <span className="quote-a">{q.a}</span>
+                  <span className="quote-r">{q.r}</span>
+                </span>
+              </a>
+            : <span className="quote-who">
+                <span className="ava">
+                  {q.img
+                    ? <img className="ava-img" src={q.img} alt={q.a} width="42" height="42" />
+                    : <image-slot id={"quote-" + i} shape="circle" placeholder={q.a}></image-slot>}
+                  <span className="ava-in">{q.a.split(" ").map(n => n[0]).slice(0, 2).join("")}</span>
+                </span>
+                <span className="quote-id">
+                  <span className="quote-a">{q.a}</span>
+                  <span className="quote-r">{q.r}</span>
+                </span>
+              </span>}
         </footer>
       </blockquote>
       <div className="dots">
@@ -464,15 +554,17 @@ function Progress() {
 function Nav({ t, lang, setLang }) {
   const [hover, setHover] = useS(false);
   const [pin, setPin] = useS(false);
-  const open = hover || pin;
+  const [shut, setShut] = useS(false);
+  const open = pin || (hover && !shut);
+  const close = () => { setPin(false); setHover(false); setShut(true); };
   return (
     <nav className="nav-wrap">
       <div
         className={"nav" + (open ? " nav-open" : "")}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
+        onPointerEnter={e => { if (e.pointerType === "mouse") setHover(true); }}
+        onPointerLeave={e => { if (e.pointerType === "mouse") { setHover(false); setShut(false); } }}
       >
-        <button className="nav-toggle" onClick={() => setPin(v => !v)} aria-label="menu">
+        <button className="nav-toggle" onClick={() => { if (open) close(); else { setPin(true); setShut(false); } }} aria-label="menu" aria-expanded={open}>
           <svg width="16" height="12" viewBox="0 0 16 12" fill="none" className={open ? "bars x" : "bars"}>
             <path className="b1" d="M1 1.5h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
             <path className="b2" d="M1 10.5h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
@@ -480,10 +572,10 @@ function Nav({ t, lang, setLang }) {
         </button>
         <span className="nav-brand">Filipe Martins</span>
         <div className="nav-links" aria-hidden={!open}>
-          <a href="#work" onClick={() => setPin(false)}>{t.nav.work}</a>
-          <a href="#exp" onClick={() => setPin(false)}>{t.nav.exp}</a>
-          <a href="#filka" onClick={() => setPin(false)}>{t.nav.filka}</a>
-          <a href="#contact" onClick={() => setPin(false)}>{t.nav.contact}</a>
+          <a href="#work" onClick={close}>{t.nav.work}</a>
+          <a href="#exp" onClick={close}>{t.nav.exp}</a>
+          <a href="#filka" onClick={close}>{t.nav.filka}</a>
+          <a href="#contact" onClick={close}>{t.nav.contact}</a>
         </div>
       </div>
       <button className="lang" onClick={() => setLang(lang === "pt" ? "en" : "pt")}>
@@ -517,7 +609,7 @@ function Hero({ t }) {
           </div>
         </div>
         <div className="hero-r">
-          <window.Badge b={h.badge} side={h.side} />
+          <window.Badge b={h.badge} side={h.side} tiltHint={h.tiltHint} />
         </div>
       </div>
     </header>
@@ -558,16 +650,30 @@ function App() {
   useE(() => { localStorage.setItem("fm_lang", lang); }, [lang]);
 
   useE(() => {
-    const show = () => document.querySelectorAll("[data-rv]").forEach(e => e.classList.add("in"));
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-      show(); return;
-    }
-    const io = new IntersectionObserver(es => es.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-    }), { rootMargin: "0px 0px -10% 0px", threshold: 0.06 });
-    document.querySelectorAll("[data-rv]").forEach(e => io.observe(e));
-    const safety = setTimeout(show, 2600);
-    return () => { io.disconnect(); clearTimeout(safety); };
+    const nodes = () => Array.from(document.querySelectorAll("[data-rv],[data-rvi]"));
+    const showAll = () => nodes().forEach(e => e.classList.add("in"));
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { showAll(); return; }
+    let raf = 0;
+    const pass = () => {
+      raf = 0;
+      const h = window.innerHeight;
+      nodes().forEach(e => {
+        if (e.classList.contains("in")) return;
+        const r = e.getBoundingClientRect();
+        if (r.top < h * 0.9 && r.bottom > 0) e.classList.add("in");
+      });
+    };
+    const queue = () => { if (!raf) raf = requestAnimationFrame(pass); };
+    pass();
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    const safety = setTimeout(showAll, 6000);
+    return () => {
+      window.removeEventListener("scroll", queue);
+      window.removeEventListener("resize", queue);
+      if (raf) cancelAnimationFrame(raf);
+      clearTimeout(safety);
+    };
   }, [lang]);
 
   const t = window.V3[lang];

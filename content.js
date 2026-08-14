@@ -153,11 +153,11 @@ window.V3 = {
       items: [
         {
           q: "Profissional ímpar. Comprometimento e profissionalismo incomparáveis. Toda demanda destinada a ele era entregue no prazo, com riqueza de detalhes e aperfeiçoamentos.",
-          a: "Michele Lopes", r: "Coordenadora Comercial, minha gestora na Jadlog",
+          a: "Michele Lopes", r: "Coordenadora Comercial, minha gestora na Jadlog", img: "assets/michele.png", url: "https://www.linkedin.com/in/michele-lopes-586539148/",
         },
         {
           q: "Nenhum obstáculo é grande demais para ele no desenvolvimento. Sempre traz inovação e melhorias, visão de processos surpreendente, frequentemente entrega mais do que o esperado. Foi meu braço direito como dev e tech lead, impecavelmente confiável.",
-          a: "Lorena Santos Andrade", r: "Product Owner, colega de equipe na Jadlog",
+          a: "Lorena Santos Andrade", r: "Product Owner, colega de equipe na Jadlog", img: "assets/lorena.png", url: "https://www.linkedin.com/in/lorena-santos-andrade",
         },
       ],
     },
@@ -167,7 +167,7 @@ window.V3 = {
       b1: "Agendar 30 minutos",
       b2: "Mandar um email",
     },
-    footer: { tag: "Dados que viram decisão." },
+    footer: { tag: "Dados, software e decisão." },
   },
   en: {
     nav: { work: "Work.", exp: "Experience.", filka: "Filka.", contact: "Contact." },
@@ -300,11 +300,11 @@ window.V3 = {
       items: [
         {
           q: "Outstanding professional. Unmatched commitment and professionalism. Every task assigned to him was delivered on time, with rich detail and refinement.",
-          a: "Michele Lopes", r: "Commercial Coordinator, my manager at Jadlog",
+          a: "Michele Lopes", r: "Commercial Coordinator, my manager at Jadlog", img: "assets/michele.png", url: "https://www.linkedin.com/in/michele-lopes-586539148/",
         },
         {
           q: "No obstacle is too big for him in development. Always brings innovation and improvements, a surprising eye for process, frequently delivers more than expected. He was my right hand as dev and tech lead, impeccably reliable.",
-          a: "Lorena Santos Andrade", r: "Product Owner, teammate at Jadlog",
+          a: "Lorena Santos Andrade", r: "Product Owner, teammate at Jadlog", img: "assets/lorena.png", url: "https://www.linkedin.com/in/lorena-santos-andrade",
         },
       ],
     },
@@ -314,7 +314,7 @@ window.V3 = {
       b1: "Book 30 minutes",
       b2: "Send an email",
     },
-    footer: { tag: "Data that turns into decisions." },
+    footer: { tag: "Data, software and decisions." },
   },
 };
 
@@ -402,21 +402,23 @@ window.V3.terminal = {
 /* v4 hero copy — extends the shared V3 content */
 window.V3.pt.h4 = {
   loc: "são paulo, brasil",
-  lines: ["Construído para escalar.", "Desenhado para decidir."],
-  strip: ["5 anos", "+500h/mês", "20+ soluções"],
+  lines: ["Eu transformo trabalho manual", "em sistemas que decidem sozinhos."],
+  strip: ["5 anos entre dados e software", "500h/mês devolvidas aos times", "20+ soluções em produção"],
   cta1: "Ver trabalho",
   cta2: "Vamos conversar",
-  side: "dados · ml · ia generativa",
+  side: "software · dados · ia generativa",
+  tiltHint: "toque para o crachá seguir o celular",
   axis: ["ATUALMENTE", "2021"],
   badge: { name: "Filipe Martins", role: "(Sr.) Analytics Engineer", pills: ["Omie", "Filka"] },
 };
 window.V3.en.h4 = {
   loc: "são paulo, brazil",
-  lines: ["Engineered to scale.", "Designed to decide."],
-  strip: ["5 years", "+500h/mo", "20+ solutions"],
+  lines: ["I turn manual work", "into systems that decide on their own."],
+  strip: ["5 years across data and software", "500h/month given back to teams", "20+ solutions in production"],
   cta1: "See work",
   cta2: "Let's chat",
-  side: "data · ml · generative ai",
+  side: "software · data · generative ai",
+  tiltHint: "tap to let the badge follow your phone",
   axis: ["PRESENT", "2021"],
   badge: { name: "Filipe Martins", role: "(Sr.) Analytics Engineer", pills: ["Omie", "Filka"] },
 };

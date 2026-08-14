@@ -1,6 +1,6 @@
 # Filipe Martins
 
-> Senior Analytics Engineer at Omie and co-founder of Filka Studio. Based in São Paulo, Brazil. Five years building data platforms, machine learning models and generative AI systems in production.
+> Senior Analytics Engineer at Omie and co-founder of Filka Studio. Based in São Paulo, Brazil. Works across data engineering and software development: data platforms, machine learning models, generative AI systems and full-stack applications in production.
 
 Website: https://filipoow.github.io/filipe.martins-dev/
 Email: fmartins.nascimento@outlook.com
@@ -15,7 +15,7 @@ Last updated: August 2026
 
 Filipe Martins is a Senior Analytics Engineer at Omie, a Brazilian SaaS company, where he builds machine learning models and generative AI agents on Databricks. He started in 2021 automating spreadsheets in Jadlog's back office, grew into the data team as a Data Analyst, and moved into analytics engineering at Omie in 2024. In parallel he co-founded Filka Studio in 2022, a São Paulo studio that combines software development and digital design.
 
-He works across the full data path: ingestion, modeling, orchestration, machine learning, and the applied AI layer on top. His work is measured in hours returned to teams and manual processes removed, not in tools adopted.
+He works across the full path from data to software: ingestion, modeling, orchestration, machine learning, the applied AI layer on top, and the applications and integrations that deliver it to users. He is a software engineer as much as a data engineer, writing production Python, JavaScript, Apex and APIs alongside pipelines and models. His work is measured in hours returned to teams and manual processes removed, not in tools adopted.
 
 ## Availability
 
