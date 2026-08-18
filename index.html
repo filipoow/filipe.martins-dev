@@ -13,18 +13,20 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Filipe Martins" />
 <meta property="og:url" content="https://filipoow.github.io/filipe.martins-dev/" />
-<meta property="og:title" content="Filipe Martins — Analytics Engineer" />
+<meta property="og:title" content="Filipe Martins · Analytics Engineer" />
 <meta property="og:description" content="Analytics Engineer Sênior na Omie e cofundador do Filka Studio. Dados, software, machine learning e IA generativa." />
 <meta property="og:image" content="https://filipoow.github.io/filipe.martins-dev/assets/filipe.jpg" />
 <meta property="og:locale" content="pt_BR" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Filipe Martins — Analytics Engineer" />
+<meta name="twitter:title" content="Filipe Martins · Analytics Engineer" />
 <meta name="twitter:description" content="Analytics Engineer Sênior na Omie e cofundador do Filka Studio." />
 <meta name="twitter:image" content="https://filipoow.github.io/filipe.martins-dev/assets/filipe.jpg" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="preload" as="image" href="assets/filipe.jpg" />
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="preconnect" href="https://unpkg.com" crossorigin />
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -203,6 +205,25 @@ a.quote-who:hover{background:rgba(255,255,255,.05);border-color:var(--bd2)}
 .cta-h{margin:0;font-size:clamp(36px,5.8vw,86px);font-weight:700;line-height:1;letter-spacing:-.055em}
 .cta-sub{margin:24px auto 0;max-width:600px;font-size:16.5px;line-height:1.55;color:var(--mut);text-wrap:pretty}
 .cta-btns{justify-content:center}
+.faq-sec{max-width:900px}
+.faq-list{display:flex;flex-direction:column}
+.faq-row{border-top:1px solid var(--bd2);opacity:0;transform:translateY(12px);transition:opacity .6s var(--d,0s) cubic-bezier(.2,.7,.2,1),transform .6s var(--d,0s) cubic-bezier(.2,.7,.2,1)}
+.faq-list.in .faq-row{opacity:1;transform:none}
+.faq-row:last-child{border-bottom:1px solid var(--bd2)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:24px;width:100%;padding:24px 4px;background:none;border:0;color:var(--ink);font:inherit;font-size:17px;font-weight:600;letter-spacing:-.015em;text-align:left;cursor:pointer;transition:color .2s}
+.faq-q:hover{color:var(--acc)}
+.faq-ic{position:relative;width:13px;height:13px;flex-shrink:0}
+.faq-ic::before,.faq-ic::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;background:currentColor;transform:translateY(-50%);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.faq-ic::after{transform:translateY(-50%) rotate(90deg)}
+.faq-row.on .faq-ic{color:var(--acc)}
+.faq-row.on .faq-ic::after{transform:translateY(-50%) rotate(0)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.2,.7,.2,1)}
+.faq-row.on .faq-a{grid-template-rows:1fr}
+.faq-a>p{overflow:hidden;margin:0;font-size:15.5px;line-height:1.6;color:var(--mut);max-width:660px}
+.faq-row.on .faq-a>p{padding-bottom:24px}
+.cta-reply{display:inline-flex;align-items:center;gap:9px;margin:26px 0 0;font-size:13.5px;color:var(--mut)}
+.cta-reply i{width:6px;height:6px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--acc-soft);flex-shrink:0}
+.mbar{display:none}
 .foot{max-width:1280px;margin:0 auto;padding:34px 56px 46px;border-top:1px solid var(--bd2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
 .foot-tag{margin:0;font-size:13.5px;color:var(--mut2)}
 .foot-links{display:flex;gap:24px}
@@ -230,6 +251,13 @@ a.quote-who:hover{background:rgba(255,255,255,.05);border-color:var(--bd2)}
 .term-body{height:320px}
 }
 @media(max-width:700px){
+.mbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:140;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 18px;border-radius:999px;border:1px solid var(--bd);background:rgba(16,16,16,.86);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 12px 34px rgba(0,0,0,.5);transform:translateY(140%);opacity:0;transition:transform .42s cubic-bezier(.2,.7,.2,1),opacity .3s;pointer-events:none}
+.mbar.on{transform:none;opacity:1;pointer-events:auto}
+.mbar-t{font-size:12px;line-height:1.25;color:var(--mut);flex:1;min-width:0}
+.mbar-b{flex-shrink:0;padding:11px 20px;border-radius:999px;background:var(--acc);color:var(--acc-ink);font-size:13.5px;font-weight:600;white-space:nowrap}
+.mbar-b:hover{color:var(--acc-ink)}
+.foot{padding-bottom:96px}
+.faq-q{font-size:16px;gap:16px;padding:20px 2px}
 .nav-wrap{padding:14px 24px;align-items:flex-start}
 .nav{flex-wrap:wrap;transition:border-radius .3s}
 .nav-links{flex-direction:column;gap:0;width:0;max-width:0;max-height:0;margin-left:0;padding:0;border-top:1px solid transparent;transition:max-height .42s cubic-bezier(.4,0,.2,1),opacity .3s,padding .42s,margin-top .42s}
@@ -261,16 +289,30 @@ a.quote-who:hover{background:rgba(255,255,255,.05);border-color:var(--bd2)}
 .exp-role,.exp-period,.exp-b li{opacity:1;transform:none}
 .exp-row::before{transform:scaleX(1)}
 .exp-row::after{opacity:1;transform:scale(1)}
+.faq-row{opacity:1;transform:none}
 .exp-line{transform:scaleY(1)}
 .pop{animation:none}
 .stat-one{opacity:1;transform:none}
 }
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-44M8FWYGWM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-44M8FWYGWM');window.track=function(n){gtag('event',n)}</script>
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Filipe Martins","url":"https://filipoow.github.io/filipe.martins-dev/","image":"https://filipoow.github.io/filipe.martins-dev/assets/filipe.jpg","jobTitle":"Senior Analytics Engineer","email":"mailto:fmartins.nascimento@outlook.com","address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressCountry":"BR"},"worksFor":{"@type":"Organization","name":"Omie"},"alumniOf":{"@type":"Organization","name":"Jadlog"},"founder":{"@type":"Organization","name":"Filka Studio","url":"https://filkastudio.com.br"},"knowsAbout":["Databricks","AWS","Python","Machine Learning","Generative AI","Apache Airflow","Apache Spark","dbt","Power BI","Salesforce","Software Engineering"],"sameAs":["https://linkedin.com/in/filipoow","https://github.com/filipoow","https://filkastudio.com.br"]}
+{"@context":"https://schema.org","@graph":[
+{"@type":"Person","@id":"https://filipoow.github.io/filipe.martins-dev/#filipe","name":"Filipe Martins","url":"https://filipoow.github.io/filipe.martins-dev/","image":"https://filipoow.github.io/filipe.martins-dev/assets/filipe.jpg","jobTitle":"Senior Analytics Engineer","email":"mailto:fmartins.nascimento@outlook.com","address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressRegion":"SP","addressCountry":"BR"},"worksFor":{"@type":"Organization","name":"Omie"},"alumniOf":{"@type":"Organization","name":"Jadlog"},"knowsAbout":["Databricks","AWS","Python","Machine Learning","Generative AI","Apache Airflow","Apache Spark","dbt","Power BI","Salesforce","Software Engineering"],"sameAs":["https://linkedin.com/in/filipoow","https://github.com/filipoow","https://filkastudio.com.br"]},
+{"@type":"ProfessionalService","@id":"https://filipoow.github.io/filipe.martins-dev/#servico","name":"Filipe Martins, Engenharia de Dados e IA","image":"https://filipoow.github.io/filipe.martins-dev/assets/filipe.jpg","url":"https://filipoow.github.io/filipe.martins-dev/","email":"mailto:fmartins.nascimento@outlook.com","founder":{"@id":"https://filipoow.github.io/filipe.martins-dev/#filipe"},"priceRange":"$","address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressRegion":"SP","addressCountry":"BR"},"areaServed":[{"@type":"Country","name":"Brasil"},{"@type":"Place","name":"Remoto, global"}],"serviceType":["Engenharia de dados","Machine Learning","IA generativa","Automação de processos","Salesforce"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"2","bestRating":"5"},"review":[
+{"@type":"Review","author":{"@type":"Person","name":"Michele Lopes"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"Profissional ímpar. Comprometimento e profissionalismo incomparáveis. Toda demanda destinada a ele era entregue no prazo, com riqueza de detalhes e aperfeiçoamentos."},
+{"@type":"Review","author":{"@type":"Person","name":"Lorena Santos Andrade"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"Nenhum obstáculo é grande demais para ele no desenvolvimento. Sempre traz inovação e melhorias, visão de processos surpreendente, frequentemente entrega mais do que o esperado."}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Você atende como CLT, PJ ou freela?","acceptedAnswer":{"@type":"Answer","text":"Os três. Vaga CLT com escopo desafiador, PJ pela Filka Studio para projetos pontuais ou contínuos, e freela para sprints de duas a seis semanas."}},
+{"@type":"Question","name":"Quanto custa um projeto?","acceptedAnswer":{"@type":"Answer","text":"Depende do escopo. Faço uma reunião de diagnóstico gratuita e devolvo uma proposta com três opções: mínimo viável, recomendado e completo."}},
+{"@type":"Question","name":"Em quanto tempo você começa?","acceptedAnswer":{"@type":"Answer","text":"Normalmente de uma a duas semanas depois do aceite. Em caso urgente consigo encaixar mais rápido."}},
+{"@type":"Question","name":"Você trabalha sozinho ou com time?","acceptedAnswer":{"@type":"Answer","text":"Projeto pequeno, sozinho. Projeto maior, monto squad pela Filka Studio com designer, front e back."}},
+{"@type":"Question","name":"Atende fora do Brasil?","acceptedAnswer":{"@type":"Answer","text":"Sim. Trabalho remoto e tenho experiência em comunicação assíncrona em inglês."}}]}
+]}
 </script>
 </head>
 <body>

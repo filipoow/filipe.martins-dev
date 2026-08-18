@@ -605,7 +605,7 @@ function Hero({ t }) {
           </p>
           <div className="hero-ctas">
             <a className="pill" href="#work">{h.cta1}</a>
-            <a className="pill pill-solid" href={window.V3.links.calendly} target="_blank" rel="noopener">{h.cta2}</a>
+            <a className="pill pill-solid" href={window.V3.links.agenda} target="_blank" rel="noopener" onClick={() => window.track && window.track("agenda_hero")}>{h.cta2}</a>
           </div>
         </div>
         <div className="hero-r">
@@ -616,16 +616,53 @@ function Hero({ t }) {
   );
 }
 
+function FAQ({ t }) {
+  const [open, setOpen] = useS(0);
+  return (
+    <section className="sec faq-sec" id="faq">
+      <h2 className="sec-h" data-rv>{t.faq.heading}</h2>
+      <div className="faq-list" data-rvi>
+        {t.faq.items.map((f, i) => (
+          <div className={"faq-row" + (open === i ? " on" : "")} key={i} style={{ "--d": i * 0.07 + "s" }}>
+            <button className="faq-q" onClick={() => setOpen(open === i ? -1 : i)} aria-expanded={open === i}>
+              <span>{f.q}</span>
+              <i className="faq-ic"></i>
+            </button>
+            <div className="faq-a"><p>{f.a}</p></div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Contact({ t }) {
   return (
     <section className="sec cta-sec" id="contact" data-rv>
       <h2 className="cta-h">{t.cta.heading}</h2>
       <p className="cta-sub">{t.cta.sub}</p>
       <div className="hero-ctas cta-btns">
-        <a className="pill pill-solid" href={window.V3.links.calendly} target="_blank" rel="noopener">{t.cta.b1}</a>
-        <a className="pill" href={window.V3.links.email}>{t.cta.b2}</a>
+        <a className="pill pill-solid" href={window.V3.links.agenda} target="_blank" rel="noopener" onClick={() => window.track && window.track("agenda_cta")}>{t.cta.b1}</a>
+        <a className="pill" href={window.V3.links.email} onClick={() => window.track && window.track("email_cta")}>{t.cta.b2}</a>
       </div>
+      <p className="cta-reply"><i></i>{t.cta.reply}</p>
     </section>
+  );
+}
+
+function MobileBar({ t }) {
+  const [on, setOn] = useS(false);
+  useE(() => {
+    const check = () => setOn(window.scrollY > window.innerHeight * 0.72);
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    return () => window.removeEventListener("scroll", check);
+  }, []);
+  return (
+    <div className={on ? "mbar on" : "mbar"}>
+      <span className="mbar-t">{t.cta.reply}</span>
+      <a className="mbar-b" href={window.V3.links.agenda} target="_blank" rel="noopener" onClick={() => window.track && window.track("agenda_mobile")}>{t.h4.barCta}</a>
+    </div>
   );
 }
 
@@ -639,6 +676,7 @@ function Footer({ t }) {
         <a href={window.V3.links.email}>Email</a>
         <a href={window.V3.links.filka} target="_blank" rel="noopener">Filka</a>
         <a href="llms.txt" target="_blank" rel="noopener">llms.txt</a>
+        <a href="privacidade.html">{t.footer.privacy}</a>
       </div>
       <p className="foot-copy">© 2026</p>
     </footer>
@@ -687,8 +725,10 @@ function App() {
       <window.Stats t={t} />
       <window.Experience t={t} />
       <window.Quotes t={t} />
+      <FAQ t={t} />
       <Contact t={t} />
       <Footer t={t} />
+      <MobileBar t={t} />
     </React.Fragment>
   );
 }

@@ -1,6 +1,6 @@
 window.V3 = {
   links: {
-    calendly: "https://calendly.com/emaildofilipe-m/30min",
+    agenda: "https://calendar.app.google/dQYwxnSev9Y9VLbD8",
     email: "mailto:fmartins.nascimento@outlook.com",
     linkedin: "https://linkedin.com/in/filipoow",
     github: "https://github.com/filipoow",
@@ -161,13 +161,24 @@ window.V3 = {
         },
       ],
     },
+    faq: {
+      heading: "Perguntas frequentes.",
+      items: [
+        { q: "Você atende como CLT, PJ ou freela?", a: "Os três. Vaga CLT com escopo desafiador, PJ pela Filka Studio para projetos pontuais ou contínuos, e freela para sprints de duas a seis semanas." },
+        { q: "Quanto custa um projeto?", a: "Depende do escopo. Faço uma reunião de diagnóstico gratuita e devolvo uma proposta com três opções: mínimo viável, recomendado e completo. Você escolhe o que cabe no orçamento." },
+        { q: "Em quanto tempo você começa?", a: "Normalmente de uma a duas semanas depois do aceite. Em caso urgente consigo encaixar mais rápido, é só falar comigo." },
+        { q: "Você trabalha sozinho ou com time?", a: "Projeto pequeno, sozinho. Projeto maior, monto squad pela Filka Studio com designer, front e back." },
+        { q: "Atende fora do Brasil?", a: "Sim. Trabalho remoto e tenho experiência em comunicação assíncrona em inglês." },
+      ],
+    },
     cta: {
       heading: "Bora trocar uma ideia?",
+      reply: "Respondo toda mensagem em até 24 horas.",
       sub: "Diagnóstico inicial gratuito. Em trinta minutos saio com o problema entendido e uma proposta na sua caixa em até três dias.",
       b1: "Agendar 30 minutos",
       b2: "Mandar um email",
     },
-    footer: { tag: "Dados, software e decisão." },
+    footer: { tag: "Dados, software e decisão.", privacy: "Privacidade" },
   },
   en: {
     nav: { work: "Work.", exp: "Experience.", filka: "Filka.", contact: "Contact." },
@@ -308,13 +319,24 @@ window.V3 = {
         },
       ],
     },
+    faq: {
+      heading: "Frequently asked.",
+      items: [
+        { q: "Do you take full-time, contract or freelance?", a: "All three. Full-time with challenging scope, contract through Filka Studio for one-off or ongoing projects, and freelance for two to six week sprints." },
+        { q: "How much does a project cost?", a: "It depends on scope. I run a free discovery call and send back a proposal with three tiers: minimum viable, recommended and full. You pick what fits the budget." },
+        { q: "How fast can you start?", a: "Usually one to two weeks after sign-off. For urgent cases I can fit you in sooner, just tell me." },
+        { q: "Do you work solo or with a team?", a: "Small projects, solo. Larger ones, I assemble a squad through Filka Studio with designer, frontend and backend." },
+        { q: "Do you work outside Brazil?", a: "Yes. Fully remote, and comfortable with async communication in English." },
+      ],
+    },
     cta: {
       heading: "Want to chat?",
+      reply: "I reply to every message within 24 hours.",
       sub: "Free initial diagnostic. In thirty minutes I walk away with the problem understood and a proposal in your inbox within three days.",
       b1: "Book 30 minutes",
       b2: "Send an email",
     },
-    footer: { tag: "Data, software and decisions." },
+    footer: { tag: "Data, software and decisions.", privacy: "Privacy" },
   },
 };
 
@@ -354,7 +376,7 @@ window.V3.terminal = {
       "Email     fmartins.nascimento@outlook.com",
       "LinkedIn  linkedin.com/in/filipoow",
       "GitHub    github.com/filipoow",
-      "Agenda    calendly.com/emaildofilipe-m/30min",
+      "Agenda    calendar.app.google/dQYwxnSev9Y9VLbD8",
     ],
     notFound: (c) => `comando não encontrado: ${c}. Digite "help".`,
   },
@@ -393,7 +415,7 @@ window.V3.terminal = {
       "Email     fmartins.nascimento@outlook.com",
       "LinkedIn  linkedin.com/in/filipoow",
       "GitHub    github.com/filipoow",
-      "Calendar  calendly.com/emaildofilipe-m/30min",
+      "Calendar  calendar.app.google/dQYwxnSev9Y9VLbD8",
     ],
     notFound: (c) => `command not found: ${c}. Type "help".`,
   },
@@ -407,6 +429,7 @@ window.V3.pt.h4 = {
   cta1: "Ver trabalho",
   cta2: "Vamos conversar",
   side: "software · dados · ia generativa",
+  barCta: "Vamos conversar",
   tiltHint: "toque para o crachá seguir o celular",
   axis: ["ATUALMENTE", "2021"],
   badge: { name: "Filipe Martins", role: "(Sr.) Analytics Engineer", pills: ["Omie", "Filka"] },
@@ -418,6 +441,7 @@ window.V3.en.h4 = {
   cta1: "See work",
   cta2: "Let's chat",
   side: "software · data · generative ai",
+  barCta: "Let's talk",
   tiltHint: "tap to let the badge follow your phone",
   axis: ["PRESENT", "2021"],
   badge: { name: "Filipe Martins", role: "(Sr.) Analytics Engineer", pills: ["Omie", "Filka"] },
