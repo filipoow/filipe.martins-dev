@@ -413,11 +413,21 @@ function Terminal({ t, lang }) {
 }
 
 /* --- case cards --- */
-function CaseCard({ c, i }) {
+function CaseCard({ c, i, viewLabel, onOpen }) {
+  // Focus the card explicitly before opening — click-driven focus isn't
+  // reliable across engines, and the overlay's close hands focus back here.
+  const open = e => { if (e.currentTarget.focus) e.currentTarget.focus(); onOpen(i); };
   return (
-    <article className="card">
+    <article
+      className="card" tabIndex="0" role="button" aria-haspopup="dialog"
+      onClick={open}
+      onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(e); } }}
+    >
       <div className="card-shot">
-        <image-slot id={"case-" + i} shape="rounded" radius="14" placeholder={"Print de " + c.name}></image-slot>
+        <image-slot
+          id={"case-" + i} shape="rounded" radius="14" placeholder={"Print de " + c.name}
+          src={c.img} credit={c.credit} credit-href={c.creditHref} alt={c.alt}
+        ></image-slot>
       </div>
       <div className="card-meta">
         <span>{c.co}</span><span className="dim">·</span><span>{c.yr}</span>
@@ -433,7 +443,101 @@ function CaseCard({ c, i }) {
           {c.tags.map(x => <span key={x}>{x}</span>)}
         </div>
       </div>
+      <span className="card-view">
+        {viewLabel}
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </span>
     </article>
+  );
+}
+
+/* --- case detail overlay: opens as a sheet rising from the card, not a centered dialog --- */
+function CaseDetail({ c, i, dl, onClose }) {
+  const [closing, setClosing] = useSW(false);
+  const backRef = useRW(null);
+
+  const startClose = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { onClose(); return; }
+    setClosing(true);
+    setTimeout(onClose, 260);
+  };
+
+  useEW(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = e => { if (e.key === "Escape") startClose(); };
+    document.addEventListener("keydown", onKey);
+    if (backRef.current) backRef.current.focus();
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+  return (
+    <div className={"cd-back" + (closing ? " closing" : "")} onClick={startClose}>
+      <div
+        className={"cd-panel" + (closing ? " closing" : "")}
+        role="dialog" aria-modal="true" aria-label={c.name}
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="cd-top">
+          <button className="cd-back-btn" ref={backRef} onClick={startClose}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 7L7 17M7 17V8M7 17H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" transform="rotate(180 12 12)"/></svg>
+            {dl.back}
+          </button>
+          <span className="cd-crumb">{c.co} <span className="dim">/</span> {c.yr}</span>
+        </div>
+        <div className="cd-body">
+          <div className="cd-shot">
+            <image-slot id={"case-detail-" + i} shape="rect" src={c.img} credit={c.credit} credit-href={c.creditHref} alt={c.alt}></image-slot>
+          </div>
+          <div className="cd-meta">
+            <div>
+              <div className="card-m">{c.metric}</div>
+              <div className="card-ml">{c.label}</div>
+            </div>
+            <div className="cd-tags">
+              {c.tags.map(x => {
+                const tech = window.V3.tech.find(t => t.n.toLowerCase() === x.toLowerCase());
+                return (
+                  <span key={x} className="cd-tag">
+                    {tech && <Mark x={tech} size={14} />}
+                    {x}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+          <h2 className="cd-title">{c.name}</h2>
+          <p className="cd-desc">{c.desc}</p>
+          <div className="cd-cols">
+            <section>
+              <h3 className="cd-h">{dl.discovery}</h3>
+              <ul className="cd-list">
+                {c.detail.discovery.map((d, k) => <li key={k}>{d}</li>)}
+              </ul>
+            </section>
+            <section>
+              <h3 className="cd-h">{dl.steps}</h3>
+              <ol className="cd-steps">
+                {c.detail.steps.map((s, k) => (
+                  <li key={k}><span className="cd-step-n">{k + 1}</span>{s}</li>
+                ))}
+              </ol>
+            </section>
+          </div>
+          <div className="cd-cta">
+            <a
+              className="pill pill-solid" href={window.V3.links.agenda} target="_blank" rel="noopener"
+              onClick={() => window.track && window.track("agenda_case")}
+            >
+              {dl.cta}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -463,8 +567,16 @@ function FilkaPanel({ t }) {
 function Work({ t, lang }) {
   const [tab, setTab] = useSW(0);
   const [ind, setInd] = useSW({ opacity: 0 });
+  const [openIdx, setOpenIdx] = useSW(null);
   const btns = useRW([]);
   const wrapRef = useRW(null);
+  const lastFocus = useRW(null);
+
+  const openCase = i => { lastFocus.current = document.activeElement; setOpenIdx(i); };
+  const closeCase = () => {
+    setOpenIdx(null);
+    if (lastFocus.current && lastFocus.current.focus) lastFocus.current.focus();
+  };
 
   useEW(() => {
     const place = () => {
@@ -508,7 +620,9 @@ function Work({ t, lang }) {
         <React.Fragment>
           <p className="tab-hint">{t.work.hint}</p>
           <div className="cards pop">
-            {t.work.cases.map((c, i) => <CaseCard key={i} c={c} i={i} />)}
+            {t.work.cases.map((c, i) => (
+              <CaseCard key={i} c={c} i={i} viewLabel={t.work.detailLabels.view} onOpen={openCase} />
+            ))}
           </div>
         </React.Fragment>
       )}
@@ -518,6 +632,9 @@ function Work({ t, lang }) {
           <p className="tab-hint">{t.work.terminalHint}</p>
           <div className="pop"><Terminal t={t} lang={lang} /></div>
         </React.Fragment>
+      )}
+      {openIdx !== null && (
+        <CaseDetail c={t.work.cases[openIdx]} i={openIdx} dl={t.work.detailLabels} onClose={closeCase} />
       )}
     </section>
   );

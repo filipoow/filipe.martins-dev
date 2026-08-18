@@ -49,6 +49,23 @@ window.V3 = {
           metric: "100%", label: "do roteamento agora é automatizado",
           desc: "Antes o time fazia o match manual. Construí um modelo que calcula um score por cliente e cruza com o perfil de cada franquia.",
           tags: ["Python", "Scikit-learn", "Databricks"],
+          img: "https://images.unsplash.com/photo-1511068797325-6083f0f872b1?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by Kelsey Knight on Unsplash", creditHref: "https://unsplash.com/@kelsoknight",
+          alt: "Mão apontando para um mapa com pinos marcando localizações",
+          detail: {
+            discovery: [
+              "Mapeei como o time de operações decidia manualmente qual franquia atendia cada cliente novo — critérios informais, sem nada registrado.",
+              "Levantei o histórico de alocações no Databricks pra achar os sinais que mais pesavam: localização, porte do cliente, capacidade da franquia.",
+              "Entrevistei os analistas responsáveis pra validar as hipóteses antes de sair modelando.",
+            ],
+            steps: [
+              "Consolidação dos dados de clientes e franquias em uma tabela única no Databricks.",
+              "Engenharia de features: distância, capacidade ociosa, histórico de performance da franquia.",
+              "Modelo de scoring em Scikit-learn, validado contra as alocações manuais históricas.",
+              "Pipeline de scoring automático em produção, com fallback pra revisão manual em casos de baixa confiança.",
+              "Acompanhamento pós-lançamento: taxa de aceitação da alocação e tempo de resposta.",
+            ],
+          },
         },
         {
           co: "Omie", yr: "2025",
@@ -56,6 +73,23 @@ window.V3 = {
           metric: "−400h", label: "por mês de busca em base de conhecimento",
           desc: "Agente que consulta políticas, processos e documentação técnica em linguagem natural. Acelerou o onboarding do time.",
           tags: ["LLMs", "RAG", "OpenAI"],
+          img: "https://images.unsplash.com/photo-1647154933795-422ba6b3034e?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by Vardan Papikyan on Unsplash", creditHref: "https://unsplash.com/@varpap",
+          alt: "Pessoa digitando em um notebook de perto",
+          detail: {
+            discovery: [
+              "Mapeei onde o conhecimento da empresa realmente vivia: Confluence, Google Docs, planilhas e mensagens soltas no Slack.",
+              "Entrevistei gente recém-contratada pra entender onde perdiam mais tempo procurando informação.",
+              "A maior dor não era falta de documentação — era não saber onde procurar.",
+            ],
+            steps: [
+              "Ingestão e chunking dos documentos internos: políticas, processos, docs técnicos.",
+              "Indexação vetorial e pipeline de RAG pra recuperar o trecho certo antes de gerar a resposta.",
+              "Integração com a API da OpenAI pra geração de respostas, sempre citando a fonte.",
+              "Interface de chat interna, plugada no fluxo de trabalho do time.",
+              "Loop de feedback (👍/👎) pra saber onde a resposta errava e retreinar o retrieval.",
+            ],
+          },
         },
         {
           co: "Jadlog", yr: "2023",
@@ -63,6 +97,23 @@ window.V3 = {
           metric: "12", label: "dashboards executivos em uma fonte de verdade",
           desc: "Desenhei a estrutura comercial em Oracle e os pipelines em Spark e Airflow, alimentando o Power BI da diretoria.",
           tags: ["PL/SQL", "Spark", "Airflow"],
+          img: "https://images.unsplash.com/photo-1686061593213-98dad7c599b9?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by 1981 Digital on Unsplash", creditHref: "https://unsplash.com/@1981digital",
+          alt: "Tela de computador exibindo um dashboard de dados",
+          detail: {
+            discovery: [
+              "Levantei com a diretoria comercial quais decisões dependiam de números que vinham de planilhas divergentes.",
+              "Mapeei as fontes: banco Oracle transacional, exports manuais e três sistemas que nunca batiam entre si.",
+              "Priorizei os 12 KPIs que realmente moviam decisão, descartando dezenas de métricas de vaidade.",
+            ],
+            steps: [
+              "Modelagem da estrutura comercial em Oracle e PL/SQL, como fonte única de verdade.",
+              "Pipelines de ETL em Spark orquestrados por Airflow, com teste de qualidade em cada etapa.",
+              "Camada de agregação pensada pro consumo direto no Power BI, sem lógica duplicada nos relatórios.",
+              "Dashboards executivos publicados e validados com cada área antes do rollout.",
+              "Documentação da linhagem de dados, pra qualquer decisão em cascata ser rastreável.",
+            ],
+          },
         },
         {
           co: "Jadlog", yr: "2023",
@@ -70,6 +121,23 @@ window.V3 = {
           metric: "−60h", label: "por semana de trabalho manual",
           desc: "Scripts que formatam tabelas de frete para VTEX, Intelipost e Loja Integrada. Eliminou retrabalho recorrente.",
           tags: ["Python", "Pandas"],
+          img: "https://images.unsplash.com/photo-1685483749753-0dab7e144794?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by Brayden Prato on Unsplash", creditHref: "https://unsplash.com/@pratophoto",
+          alt: "Corredores de um galpão logístico com prateleiras cheias de caixas",
+          detail: {
+            discovery: [
+              "Acompanhei o time comercial formatando manualmente a mesma tabela de frete em três formatos diferentes, toda semana.",
+              "Levantei as regras (às vezes tácitas) de cada plataforma: colunas exigidas, unidades, faixas de peso e CEP.",
+              "Encontrei inconsistências que geravam erro de cotação lá na frente, sem ninguém enxergar a causa raiz.",
+            ],
+            steps: [
+              "Script em Python e Pandas pra ler a tabela mestre de frete e validar as regras de negócio antes de exportar.",
+              "Três exportadores dedicados — VTEX, Intelipost, Loja Integrada — cada um respeitando o schema da plataforma.",
+              "Validações automáticas de faixa de peso, CEP e valor, pra pegar erro antes de subir pro sistema.",
+              "Rotina agendada, substituindo o processo manual semanal por um job único.",
+              "Handoff documentado pro time comercial rodar sozinho, sem depender de mim a cada tabela nova.",
+            ],
+          },
         },
         {
           co: "Filka Studio", yr: "2024",
@@ -77,6 +145,23 @@ window.V3 = {
           metric: "2", label: "clientes ativos com Sales Cloud customizado",
           desc: "Implementações de Sales Cloud, automações em Apex e Flows, integrações via API e dashboards executivos.",
           tags: ["Apex", "Flows", "LWC"],
+          img: "https://images.unsplash.com/photo-1758518732175-5d608ba3abdf?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by Vitaly Gariev on Unsplash", creditHref: "https://unsplash.com/@silverkblack",
+          alt: "Equipe reunida em volta de uma mesa em escritório moderno",
+          detail: {
+            discovery: [
+              "Reunião de diagnóstico com cada cliente pra entender o funil de vendas real — não o que um CRM genérico assumia que era.",
+              "Mapeamento dos sistemas que precisavam conversar com o Salesforce: ERP, WhatsApp, planilha de comissionamento.",
+              "Levantamento dos relatórios que a diretoria realmente olhava, pra desenhar os dashboards certos desde o início.",
+            ],
+            steps: [
+              "Modelagem de objetos e do funil de vendas customizado no Sales Cloud.",
+              "Automações em Apex e Flows pra eliminar etapas manuais: roteamento de lead, alçadas de aprovação.",
+              "Integrações via API com os sistemas do cliente, ERP e ferramentas de comunicação.",
+              "Componentes customizados em LWC onde o Salesforce padrão não dava conta do fluxo do cliente.",
+              "Dashboards executivos e handover documentado pro time do cliente manter sozinho.",
+            ],
+          },
         },
       ],
       filka: {
@@ -94,6 +179,11 @@ window.V3 = {
         cta: "Ver o site da Filka",
       },
       terminalHint: "Digite help para ver os comandos.",
+      detailLabels: {
+        view: "Ver case completo", back: "Trabalho",
+        discovery: "O que eu levantei", steps: "Passo a passo",
+        cta: "Vamos conversar sobre o seu projeto",
+      },
     },
     stats: {
       heading: "Alguns números.",
@@ -207,6 +297,23 @@ window.V3 = {
           metric: "100%", label: "of routing is now automated",
           desc: "The team used to match clients manually. I built a model that scores each client and crosses it with every franchise profile.",
           tags: ["Python", "Scikit-learn", "Databricks"],
+          img: "https://images.unsplash.com/photo-1511068797325-6083f0f872b1?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by Kelsey Knight on Unsplash", creditHref: "https://unsplash.com/@kelsoknight",
+          alt: "A hand pointing at a map marked with location pins",
+          detail: {
+            discovery: [
+              "Mapped how ops manually decided which franchise served each new client — informal criteria, nothing recorded.",
+              "Dug through the allocation history in Databricks for the signals that mattered most: location, client size, franchise capacity.",
+              "Interviewed the analysts doing the matching to validate hypotheses before modeling anything.",
+            ],
+            steps: [
+              "Consolidated client and franchise data into a single table in Databricks.",
+              "Feature engineering: distance, idle capacity, franchise performance history.",
+              "Scoring model in Scikit-learn, validated against the historical manual allocations.",
+              "Automated scoring pipeline in production, with a fallback to manual review for low-confidence cases.",
+              "Post-launch tracking: allocation acceptance rate and response time.",
+            ],
+          },
         },
         {
           co: "Omie", yr: "2025",
@@ -214,6 +321,23 @@ window.V3 = {
           metric: "−400h", label: "per month searching the knowledge base",
           desc: "An agent that queries policies, processes and technical docs in natural language. Sped up onboarding across the team.",
           tags: ["LLMs", "RAG", "OpenAI"],
+          img: "https://images.unsplash.com/photo-1647154933795-422ba6b3034e?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by Vardan Papikyan on Unsplash", creditHref: "https://unsplash.com/@varpap",
+          alt: "Close-up of a person typing on a laptop",
+          detail: {
+            discovery: [
+              "Mapped where company knowledge actually lived: Confluence, Google Docs, spreadsheets, loose Slack messages.",
+              "Interviewed recent hires to find out where they lost the most time searching for information.",
+              "The real pain wasn't missing documentation — it was not knowing where to look.",
+            ],
+            steps: [
+              "Ingestion and chunking of internal docs: policies, processes, technical documentation.",
+              "Vector indexing and a RAG pipeline to retrieve the right passage before generating an answer.",
+              "Integration with the OpenAI API for answer generation, always citing the source.",
+              "Internal chat interface, plugged straight into the team's workflow.",
+              "Feedback loop (👍/👎) to spot wrong answers and retrain retrieval.",
+            ],
+          },
         },
         {
           co: "Jadlog", yr: "2023",
@@ -221,6 +345,23 @@ window.V3 = {
           metric: "12", label: "executive dashboards on one source of truth",
           desc: "Designed the commercial structure in Oracle and the Spark and Airflow pipelines feeding leadership's Power BI.",
           tags: ["PL/SQL", "Spark", "Airflow"],
+          img: "https://images.unsplash.com/photo-1686061593213-98dad7c599b9?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by 1981 Digital on Unsplash", creditHref: "https://unsplash.com/@1981digital",
+          alt: "Computer screen displaying a data dashboard",
+          detail: {
+            discovery: [
+              "Worked with commercial leadership to find which decisions relied on numbers pulled from diverging spreadsheets.",
+              "Mapped the sources: the transactional Oracle database, manual exports, and three systems that never agreed.",
+              "Prioritized the 12 KPIs that actually drove decisions, cutting dozens of vanity metrics.",
+            ],
+            steps: [
+              "Modeled the commercial structure in Oracle and PL/SQL as the single source of truth.",
+              "ETL pipelines in Spark orchestrated by Airflow, with quality checks at every stage.",
+              "An aggregation layer built for direct Power BI consumption, no duplicated logic across reports.",
+              "Executive dashboards published and validated with each department before rollout.",
+              "Documented data lineage so any downstream decision could be traced back.",
+            ],
+          },
         },
         {
           co: "Jadlog", yr: "2023",
@@ -228,6 +369,23 @@ window.V3 = {
           metric: "−60h", label: "per week of manual work",
           desc: "Scripts that format freight tables for VTEX, Intelipost and Loja Integrada. Killed recurring rework for good.",
           tags: ["Python", "Pandas"],
+          img: "https://images.unsplash.com/photo-1685483749753-0dab7e144794?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by Brayden Prato on Unsplash", creditHref: "https://unsplash.com/@pratophoto",
+          alt: "Aisles of a logistics warehouse with shelves full of boxes",
+          detail: {
+            discovery: [
+              "Watched the commercial team manually reformat the same freight table into three different formats, every week.",
+              "Mapped each platform's rules, some of them tacit: required columns, units, weight brackets, zip codes.",
+              "Found inconsistencies that caused quoting errors further down the chain, with nobody seeing the root cause.",
+            ],
+            steps: [
+              "Python and Pandas script to read the master freight table and validate business rules before any export.",
+              "Three dedicated exporters — VTEX, Intelipost, Loja Integrada — each matching the platform's required schema.",
+              "Automated checks on weight brackets, zip codes and values, to catch errors before upload.",
+              "Scheduled job replacing the weekly manual process with a single run.",
+              "Documented handoff so the commercial team could run it solo, without needing me for every new table.",
+            ],
+          },
         },
         {
           co: "Filka Studio", yr: "2024",
@@ -235,6 +393,23 @@ window.V3 = {
           metric: "2", label: "active clients on customized Sales Cloud",
           desc: "Sales Cloud implementations, Apex and Flows automations, API integrations and executive dashboards.",
           tags: ["Apex", "Flows", "LWC"],
+          img: "https://images.unsplash.com/photo-1758518732175-5d608ba3abdf?fm=jpg&q=80&w=1200&fit=crop",
+          credit: "Photo by Vitaly Gariev on Unsplash", creditHref: "https://unsplash.com/@silverkblack",
+          alt: "Team gathered around a table in a modern office",
+          detail: {
+            discovery: [
+              "Discovery session with each client to map their actual sales funnel — not what a generic CRM assumed it was.",
+              "Mapped which systems needed to talk to Salesforce: ERP, WhatsApp, the commission spreadsheet.",
+              "Surveyed the reports leadership actually looked at, to design the right dashboards from day one.",
+            ],
+            steps: [
+              "Object modeling and a customized sales funnel in Sales Cloud.",
+              "Apex and Flows automations to remove manual steps: lead routing, approval thresholds.",
+              "API integrations with the client's systems — ERP and communication tools.",
+              "Custom LWC components wherever standard Salesforce couldn't handle the client's flow.",
+              "Executive dashboards and a documented handover for the client's team to maintain solo.",
+            ],
+          },
         },
       ],
       filka: {
@@ -252,6 +427,11 @@ window.V3 = {
         cta: "Visit the Filka site",
       },
       terminalHint: "Type help to see the commands.",
+      detailLabels: {
+        view: "See full case", back: "Work",
+        discovery: "What I found", steps: "Step by step",
+        cta: "Let's talk about your project",
+      },
     },
     stats: {
       heading: "A few numbers.",
