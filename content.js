@@ -49,9 +49,8 @@ window.V3 = {
           metric: "100%", label: "do roteamento agora é automatizado",
           desc: "Antes o time fazia o match manual. Construí um modelo que calcula um score por cliente e cruza com o perfil de cada franquia.",
           tags: ["Python", "Scikit-learn", "Databricks"],
-          img: "https://images.unsplash.com/photo-1511068797325-6083f0f872b1?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by Kelsey Knight on Unsplash", creditHref: "https://unsplash.com/@kelsoknight",
-          alt: "Mão apontando para um mapa com pinos marcando localizações",
+          img: "assets/case-1-databricks.svg",
+          alt: "Notebook do Databricks com código de scoring e um gráfico de resultado",
           detail: {
             discovery: [
               "Mapeei como o time de operações decidia manualmente qual franquia atendia cada cliente novo — critérios informais, sem nada registrado.",
@@ -73,9 +72,8 @@ window.V3 = {
           metric: "−400h", label: "por mês de busca em base de conhecimento",
           desc: "Agente que consulta políticas, processos e documentação técnica em linguagem natural. Acelerou o onboarding do time.",
           tags: ["LLMs", "RAG", "OpenAI"],
-          img: "https://images.unsplash.com/photo-1647154933795-422ba6b3034e?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by Vardan Papikyan on Unsplash", creditHref: "https://unsplash.com/@varpap",
-          alt: "Pessoa digitando em um notebook de perto",
+          img: "assets/case-2-chatbot.svg",
+          alt: "Interface de chat com uma resposta do assistente e as fontes citadas",
           detail: {
             discovery: [
               "Mapeei onde o conhecimento da empresa realmente vivia: Confluence, Google Docs, planilhas e mensagens soltas no Slack.",
@@ -97,9 +95,8 @@ window.V3 = {
           metric: "12", label: "dashboards executivos em uma fonte de verdade",
           desc: "Desenhei a estrutura comercial em Oracle e os pipelines em Spark e Airflow, alimentando o Power BI da diretoria.",
           tags: ["PL/SQL", "Spark", "Airflow"],
-          img: "https://images.unsplash.com/photo-1686061593213-98dad7c599b9?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by 1981 Digital on Unsplash", creditHref: "https://unsplash.com/@1981digital",
-          alt: "Tela de computador exibindo um dashboard de dados",
+          img: "assets/case-3-dashboards.svg",
+          alt: "Dashboard de KPIs comerciais com cartões e gráficos de barra e linha",
           detail: {
             discovery: [
               "Levantei com a diretoria comercial quais decisões dependiam de números que vinham de planilhas divergentes.",
@@ -121,9 +118,8 @@ window.V3 = {
           metric: "−60h", label: "por semana de trabalho manual",
           desc: "Scripts que formatam tabelas de frete para VTEX, Intelipost e Loja Integrada. Eliminou retrabalho recorrente.",
           tags: ["Python", "Pandas"],
-          img: "https://images.unsplash.com/photo-1685483749753-0dab7e144794?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by Brayden Prato on Unsplash", creditHref: "https://unsplash.com/@pratophoto",
-          alt: "Corredores de um galpão logístico com prateleiras cheias de caixas",
+          img: "assets/case-4-app.svg",
+          alt: "Tela de aplicativo com a tabela de fretes e o status de cada linha",
           detail: {
             discovery: [
               "Acompanhei o time comercial formatando manualmente a mesma tabela de frete em três formatos diferentes, toda semana.",
@@ -145,9 +141,8 @@ window.V3 = {
           metric: "2", label: "clientes ativos com Sales Cloud customizado",
           desc: "Implementações de Sales Cloud, automações em Apex e Flows, integrações via API e dashboards executivos.",
           tags: ["Apex", "Flows", "LWC"],
-          img: "https://images.unsplash.com/photo-1758518732175-5d608ba3abdf?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by Vitaly Gariev on Unsplash", creditHref: "https://unsplash.com/@silverkblack",
-          alt: "Equipe reunida em volta de uma mesa em escritório moderno",
+          img: "assets/case-5-salesforce.svg",
+          alt: "Tela do Salesforce com o funil de vendas e o registro de um cliente",
           detail: {
             discovery: [
               "Reunião de diagnóstico com cada cliente pra entender o funil de vendas real — não o que um CRM genérico assumia que era.",
@@ -297,9 +292,8 @@ window.V3 = {
           metric: "100%", label: "of routing is now automated",
           desc: "The team used to match clients manually. I built a model that scores each client and crosses it with every franchise profile.",
           tags: ["Python", "Scikit-learn", "Databricks"],
-          img: "https://images.unsplash.com/photo-1511068797325-6083f0f872b1?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by Kelsey Knight on Unsplash", creditHref: "https://unsplash.com/@kelsoknight",
-          alt: "A hand pointing at a map marked with location pins",
+          img: "assets/case-1-databricks.svg",
+          alt: "A Databricks notebook with scoring code and a result chart",
           detail: {
             discovery: [
               "Mapped how ops manually decided which franchise served each new client — informal criteria, nothing recorded.",
@@ -321,9 +315,8 @@ window.V3 = {
           metric: "−400h", label: "per month searching the knowledge base",
           desc: "An agent that queries policies, processes and technical docs in natural language. Sped up onboarding across the team.",
           tags: ["LLMs", "RAG", "OpenAI"],
-          img: "https://images.unsplash.com/photo-1647154933795-422ba6b3034e?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by Vardan Papikyan on Unsplash", creditHref: "https://unsplash.com/@varpap",
-          alt: "Close-up of a person typing on a laptop",
+          img: "assets/case-2-chatbot.svg",
+          alt: "A chat interface with an assistant reply and its cited sources",
           detail: {
             discovery: [
               "Mapped where company knowledge actually lived: Confluence, Google Docs, spreadsheets, loose Slack messages.",
@@ -345,9 +338,8 @@ window.V3 = {
           metric: "12", label: "executive dashboards on one source of truth",
           desc: "Designed the commercial structure in Oracle and the Spark and Airflow pipelines feeding leadership's Power BI.",
           tags: ["PL/SQL", "Spark", "Airflow"],
-          img: "https://images.unsplash.com/photo-1686061593213-98dad7c599b9?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by 1981 Digital on Unsplash", creditHref: "https://unsplash.com/@1981digital",
-          alt: "Computer screen displaying a data dashboard",
+          img: "assets/case-3-dashboards.svg",
+          alt: "A commercial KPI dashboard with cards and bar/line charts",
           detail: {
             discovery: [
               "Worked with commercial leadership to find which decisions relied on numbers pulled from diverging spreadsheets.",
@@ -369,9 +361,8 @@ window.V3 = {
           metric: "−60h", label: "per week of manual work",
           desc: "Scripts that format freight tables for VTEX, Intelipost and Loja Integrada. Killed recurring rework for good.",
           tags: ["Python", "Pandas"],
-          img: "https://images.unsplash.com/photo-1685483749753-0dab7e144794?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by Brayden Prato on Unsplash", creditHref: "https://unsplash.com/@pratophoto",
-          alt: "Aisles of a logistics warehouse with shelves full of boxes",
+          img: "assets/case-4-app.svg",
+          alt: "An app screen with the freight table and each row's status",
           detail: {
             discovery: [
               "Watched the commercial team manually reformat the same freight table into three different formats, every week.",
@@ -393,9 +384,8 @@ window.V3 = {
           metric: "2", label: "active clients on customized Sales Cloud",
           desc: "Sales Cloud implementations, Apex and Flows automations, API integrations and executive dashboards.",
           tags: ["Apex", "Flows", "LWC"],
-          img: "https://images.unsplash.com/photo-1758518732175-5d608ba3abdf?fm=jpg&q=80&w=1200&fit=crop",
-          credit: "Photo by Vitaly Gariev on Unsplash", creditHref: "https://unsplash.com/@silverkblack",
-          alt: "Team gathered around a table in a modern office",
+          img: "assets/case-5-salesforce.svg",
+          alt: "A Salesforce screen with the sales pipeline and a client record",
           detail: {
             discovery: [
               "Discovery session with each client to map their actual sales funnel — not what a generic CRM assumed it was.",

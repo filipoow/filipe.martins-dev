@@ -1,0 +1,74 @@
+<svg viewBox="0 0 1200 750" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="750" fill="#F3F3F3"/>
+<rect width="1200" height="56" fill="#00A1E0"/>
+<rect x="32" y="18" width="110" height="20" rx="5" fill="#FFFFFF" opacity=".92"/>
+<circle cx="1120" cy="28" r="16" fill="#FFFFFF" opacity=".85"/>
+<rect x="200" y="22" width="500" height="14" rx="7" fill="#FFFFFF" opacity=".25"/>
+
+<!-- pipeline stage bar -->
+<rect x="32" y="80" width="1136" height="56" rx="10" fill="#FFFFFF" stroke="#E2E2E2"/>
+<g font-family="sans-serif">
+<rect x="48" y="94" width="200" height="28" rx="14" fill="#00A1E0"/>
+<rect x="76" y="103" width="140" height="10" rx="5" fill="#FFFFFF" opacity=".9"/>
+<rect x="264" y="94" width="200" height="28" rx="14" fill="#E7F6FC"/>
+<rect x="292" y="103" width="140" height="10" rx="5" fill="#00A1E0" opacity=".75"/>
+<rect x="480" y="94" width="200" height="28" rx="14" fill="#F0F0F0"/>
+<rect x="508" y="103" width="140" height="10" rx="5" fill="#9a9a9a"/>
+<rect x="696" y="94" width="200" height="28" rx="14" fill="#F0F0F0"/>
+<rect x="724" y="103" width="140" height="10" rx="5" fill="#9a9a9a"/>
+<rect x="912" y="94" width="200" height="28" rx="14" fill="#F0F0F0"/>
+<rect x="940" y="103" width="140" height="10" rx="5" fill="#9a9a9a"/>
+</g>
+
+<!-- left: record card -->
+<rect x="32" y="160" width="360" height="520" rx="12" fill="#FFFFFF" stroke="#E2E2E2"/>
+<circle cx="112" cy="230" r="40" fill="#00A1E0" opacity=".15"/>
+<circle cx="112" cy="230" r="40" fill="none" stroke="#00A1E0" stroke-width="2.5"/>
+<rect x="94" y="216" width="36" height="8" rx="4" fill="#00A1E0"/>
+<rect x="100" y="232" width="24" height="8" rx="4" fill="#00A1E0" opacity=".6"/>
+<rect x="168" y="204" width="170" height="16" rx="5" fill="#2b2b2b"/>
+<rect x="168" y="228" width="120" height="10" rx="5" fill="#8a8a8a"/>
+<rect x="168" y="248" width="90" height="22" rx="11" fill="#E7F6FC"/>
+<rect x="180" y="255" width="66" height="8" rx="4" fill="#00A1E0"/>
+
+<line x1="60" y1="300" x2="364" y2="300" stroke="#EDEDED"/>
+<rect x="60" y="320" width="90" height="9" rx="4" fill="#9a9a9a"/>
+<rect x="60" y="340" width="180" height="12" rx="4" fill="#2b2b2b"/>
+<rect x="60" y="372" width="90" height="9" rx="4" fill="#9a9a9a"/>
+<rect x="60" y="392" width="150" height="12" rx="4" fill="#2b2b2b"/>
+<rect x="60" y="424" width="90" height="9" rx="4" fill="#9a9a9a"/>
+<rect x="60" y="444" width="200" height="12" rx="4" fill="#2b2b2b"/>
+<rect x="60" y="476" width="90" height="9" rx="4" fill="#9a9a9a"/>
+<rect x="60" y="496" width="60" height="20" rx="10" fill="#EAF7EE"/>
+<rect x="72" y="502" width="36" height="8" rx="4" fill="#3E9C58"/>
+
+<!-- right: related lists -->
+<rect x="416" y="160" width="752" height="240" rx="12" fill="#FFFFFF" stroke="#E2E2E2"/>
+<rect x="440" y="184" width="160" height="12" rx="5" fill="#2b2b2b"/>
+<rect x="1080" y="180" width="70" height="22" rx="6" fill="#00A1E0"/>
+<line x1="440" y1="216" x2="1144" y2="216" stroke="#EDEDED"/>
+<g>
+<rect x="440" y="234" width="480" height="10" rx="4" fill="#3a3a3a"/>
+<rect x="1000" y="232" width="70" height="16" rx="8" fill="#EAF7EE"/>
+<rect x="1012" y="237" width="46" height="7" rx="3.5" fill="#3E9C58"/>
+<line x1="440" y1="264" x2="1144" y2="264" stroke="#F3F3F3"/>
+<rect x="440" y="282" width="420" height="10" rx="4" fill="#3a3a3a"/>
+<rect x="1000" y="280" width="70" height="16" rx="8" fill="#FDF3E3"/>
+<rect x="1012" y="285" width="46" height="7" rx="3.5" fill="#B4791E"/>
+<line x1="440" y1="312" x2="1144" y2="312" stroke="#F3F3F3"/>
+<rect x="440" y="330" width="460" height="10" rx="4" fill="#3a3a3a"/>
+<rect x="1000" y="328" width="70" height="16" rx="8" fill="#EAF7EE"/>
+<rect x="1012" y="333" width="46" height="7" rx="3.5" fill="#3E9C58"/>
+</g>
+
+<rect x="416" y="420" width="752" height="260" rx="12" fill="#FFFFFF" stroke="#E2E2E2"/>
+<rect x="440" y="444" width="160" height="12" rx="5" fill="#2b2b2b"/>
+<line x1="440" y1="476" x2="1144" y2="476" stroke="#EDEDED"/>
+<circle cx="456" cy="506" r="6" fill="#00A1E0"/>
+<line x1="456" y1="512" x2="456" y2="560" stroke="#E2E2E2"/>
+<rect x="476" y="498" width="320" height="10" rx="4" fill="#3a3a3a"/>
+<rect x="476" y="516" width="180" height="9" rx="4" fill="#9a9a9a"/>
+<circle cx="456" cy="576" r="6" fill="#B8C4CC"/>
+<rect x="476" y="568" width="280" height="10" rx="4" fill="#3a3a3a"/>
+<rect x="476" y="586" width="150" height="9" rx="4" fill="#9a9a9a"/>
+</svg>

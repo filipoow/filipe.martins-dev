@@ -426,7 +426,7 @@ function CaseCard({ c, i, viewLabel, onOpen }) {
       <div className="card-shot">
         <image-slot
           id={"case-" + i} shape="rounded" radius="14" placeholder={"Print de " + c.name}
-          src={c.img} credit={c.credit} credit-href={c.creditHref} alt={c.alt}
+          src={c.img} alt={c.alt}
         ></image-slot>
       </div>
       <div className="card-meta">
@@ -490,7 +490,7 @@ function CaseDetail({ c, i, dl, onClose }) {
         </div>
         <div className="cd-body">
           <div className="cd-shot">
-            <image-slot id={"case-detail-" + i} shape="rect" src={c.img} credit={c.credit} credit-href={c.creditHref} alt={c.alt}></image-slot>
+            <image-slot id={"case-detail-" + i} shape="rect" src={c.img} alt={c.alt}></image-slot>
           </div>
           <div className="cd-meta">
             <div>
