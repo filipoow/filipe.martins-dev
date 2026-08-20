@@ -49,8 +49,8 @@ window.V3 = {
           metric: "100%", label: "do roteamento agora é automatizado",
           desc: "Antes o time fazia o match manual. Construí um modelo que calcula um score por cliente e cruza com o perfil de cada franquia.",
           tags: ["Python", "Scikit-learn", "Databricks"],
-          img: "assets/case-1-databricks.svg",
-          alt: "Notebook do Databricks com código de scoring e um gráfico de resultado",
+          img: "assets/case-1-databricks.png",
+          alt: "Notebook do Databricks com uma consulta SQL e a tabela de resultado",
           detail: {
             discovery: [
               "Mapeei como o time de operações decidia manualmente qual franquia atendia cada cliente novo — critérios informais, sem nada registrado.",
@@ -72,8 +72,8 @@ window.V3 = {
           metric: "−400h", label: "por mês de busca em base de conhecimento",
           desc: "Agente que consulta políticas, processos e documentação técnica em linguagem natural. Acelerou o onboarding do time.",
           tags: ["LLMs", "RAG", "OpenAI"],
-          img: "assets/case-2-chatbot.svg",
-          alt: "Interface de chat com uma resposta do assistente e as fontes citadas",
+          img: "assets/case-2-chatbot.jpg",
+          alt: "Aplicativo de chat de IA respondendo a uma pergunta do usuário",
           detail: {
             discovery: [
               "Mapeei onde o conhecimento da empresa realmente vivia: Confluence, Google Docs, planilhas e mensagens soltas no Slack.",
@@ -95,7 +95,7 @@ window.V3 = {
           metric: "12", label: "dashboards executivos em uma fonte de verdade",
           desc: "Desenhei a estrutura comercial em Oracle e os pipelines em Spark e Airflow, alimentando o Power BI da diretoria.",
           tags: ["PL/SQL", "Spark", "Airflow"],
-          img: "assets/case-3-dashboards.svg",
+          img: "assets/case-3-dashboards.png",
           alt: "Dashboard de KPIs comerciais com cartões e gráficos de barra e linha",
           detail: {
             discovery: [
@@ -118,8 +118,8 @@ window.V3 = {
           metric: "−60h", label: "por semana de trabalho manual",
           desc: "Scripts que formatam tabelas de frete para VTEX, Intelipost e Loja Integrada. Eliminou retrabalho recorrente.",
           tags: ["Python", "Pandas"],
-          img: "assets/case-4-app.svg",
-          alt: "Tela de aplicativo com a tabela de fretes e o status de cada linha",
+          img: "assets/case-4-app.jpg",
+          alt: "Planilha com uma tabela de tarefas, prioridade e status por linha",
           detail: {
             discovery: [
               "Acompanhei o time comercial formatando manualmente a mesma tabela de frete em três formatos diferentes, toda semana.",
@@ -141,8 +141,8 @@ window.V3 = {
           metric: "2", label: "clientes ativos com Sales Cloud customizado",
           desc: "Implementações de Sales Cloud, automações em Apex e Flows, integrações via API e dashboards executivos.",
           tags: ["Apex", "Flows", "LWC"],
-          img: "assets/case-5-salesforce.svg",
-          alt: "Tela do Salesforce com o funil de vendas e o registro de um cliente",
+          img: "assets/case-5-salesforce.jpg",
+          alt: "Aplicativo do Salesforce mostrando o funil de oportunidades por estágio",
           detail: {
             discovery: [
               "Reunião de diagnóstico com cada cliente pra entender o funil de vendas real — não o que um CRM genérico assumia que era.",
@@ -292,8 +292,8 @@ window.V3 = {
           metric: "100%", label: "of routing is now automated",
           desc: "The team used to match clients manually. I built a model that scores each client and crosses it with every franchise profile.",
           tags: ["Python", "Scikit-learn", "Databricks"],
-          img: "assets/case-1-databricks.svg",
-          alt: "A Databricks notebook with scoring code and a result chart",
+          img: "assets/case-1-databricks.png",
+          alt: "A Databricks notebook with a SQL query and the results table",
           detail: {
             discovery: [
               "Mapped how ops manually decided which franchise served each new client — informal criteria, nothing recorded.",
@@ -315,8 +315,8 @@ window.V3 = {
           metric: "−400h", label: "per month searching the knowledge base",
           desc: "An agent that queries policies, processes and technical docs in natural language. Sped up onboarding across the team.",
           tags: ["LLMs", "RAG", "OpenAI"],
-          img: "assets/case-2-chatbot.svg",
-          alt: "A chat interface with an assistant reply and its cited sources",
+          img: "assets/case-2-chatbot.jpg",
+          alt: "An AI chat app answering a user's question",
           detail: {
             discovery: [
               "Mapped where company knowledge actually lived: Confluence, Google Docs, spreadsheets, loose Slack messages.",
@@ -338,7 +338,7 @@ window.V3 = {
           metric: "12", label: "executive dashboards on one source of truth",
           desc: "Designed the commercial structure in Oracle and the Spark and Airflow pipelines feeding leadership's Power BI.",
           tags: ["PL/SQL", "Spark", "Airflow"],
-          img: "assets/case-3-dashboards.svg",
+          img: "assets/case-3-dashboards.png",
           alt: "A commercial KPI dashboard with cards and bar/line charts",
           detail: {
             discovery: [
@@ -361,8 +361,8 @@ window.V3 = {
           metric: "−60h", label: "per week of manual work",
           desc: "Scripts that format freight tables for VTEX, Intelipost and Loja Integrada. Killed recurring rework for good.",
           tags: ["Python", "Pandas"],
-          img: "assets/case-4-app.svg",
-          alt: "An app screen with the freight table and each row's status",
+          img: "assets/case-4-app.jpg",
+          alt: "A spreadsheet with a task table showing priority and status per row",
           detail: {
             discovery: [
               "Watched the commercial team manually reformat the same freight table into three different formats, every week.",
@@ -384,8 +384,8 @@ window.V3 = {
           metric: "2", label: "active clients on customized Sales Cloud",
           desc: "Sales Cloud implementations, Apex and Flows automations, API integrations and executive dashboards.",
           tags: ["Apex", "Flows", "LWC"],
-          img: "assets/case-5-salesforce.svg",
-          alt: "A Salesforce screen with the sales pipeline and a client record",
+          img: "assets/case-5-salesforce.jpg",
+          alt: "The Salesforce app showing the opportunity pipeline by stage",
           detail: {
             discovery: [
               "Discovery session with each client to map their actual sales funnel — not what a generic CRM assumed it was.",
